@@ -130,27 +130,6 @@ class Users {
             const user = userRes.rows[0];
 
             if (!user) throw new NotFoundError(`No user: ${username}`);
-
-            const userPostsRes = await db.query(
-                `SELECT id,
-                        title, 
-                        body
-                 FROM posts
-                 WHERE user_id = $1`, 
-                 [user.id]
-            );
-
-            const userReviewsRes = await db.query(
-                `SELECT id,
-                        title, 
-                        body
-                 FROM reviews
-                 WHERE user_id = $1`, 
-                 [user.id]
-            );
-
-            user.posts = userPostsRes ? userPostsRes.rows.map(a => a.id) : [];
-            user.reviews = userReviewsRes ? userReviewsRes.rows.map(a => a.id) : [];
             
             return user;
         }
@@ -215,9 +194,6 @@ class Users {
 
              if (!user) throw new NotFoundError(`No user: ${username}`);
          }
-
-         
-
 
 }
 

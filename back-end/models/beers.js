@@ -117,6 +117,14 @@ class Breweries {
     return breweriesRes.rows;
   }
 
+  /** Given a brewery name, return data about brewery.
+   *
+   * Returns { id, name, descript, address1, city, state, country,.. }
+   *   where beers is [{ name, abv, descript }, ...]
+   *
+   * Throws NotFoundError if not found.
+   **/
+
   static async get(name) {
     const breweryRes = await db.query(
         `SELECT name,
@@ -135,6 +143,17 @@ class Breweries {
     const brewery = breweryRes.rows[0];
 
     if (!brewery) throw new NotFoundError(`No beer: ${name}`);
+
+    const breweryBeersRes = await db.query(
+        `SELECT name,
+                abv,
+                descript
+         FROM beers
+         WHERE brewery_id = $1`,
+         [brewery.id]
+    );
+
+    brewery.beers = breweryBeersRes.rows;
 
     return brewery;
   }
