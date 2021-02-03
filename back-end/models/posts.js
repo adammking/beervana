@@ -34,7 +34,7 @@ class Posts {
         return post;
     }
 
-    static async addPost(user_id) {
+    static async addPost({ title, body, user_id }) {
         let postRes = await db.query(
             `INSERT INTO posts
                 (title, body, users_id)

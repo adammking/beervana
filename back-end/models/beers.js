@@ -1,10 +1,8 @@
 "use strict";
 
 const db = require("../db");
-const { sqlForPartialUpdate } = require("../helpers/sql");
 const {
-    NotFoundError, 
-    BadRequestError
+    NotFoundError 
 } = require("../expressError");
 
 class Beers {

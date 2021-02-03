@@ -1,0 +1,39 @@
+"use strict";
+
+const db = require = require("../db");
+const { NotFoundError } = require("../expressError")
+
+class Tags {
+
+    static async addTag(user_id) {
+        let tagRes = await db.query(
+            `INSERT INTO Tags
+                (type, users_id)
+             VALUES ($1, $2) 
+             RETURNING posts_id`, 
+             [type, user_id]
+        );
+
+        let tag = tagRes.rows[0];
+        return tag;
+
+    }
+
+    static async deleteTag(like_id, user_id) {
+        let tagRes = await db.query(
+            `DELETE 
+             FROM likes
+             WHERE id = $1
+             AND users_id = $2
+             RETURNING id`,
+             [like_id, user_id]
+        );
+
+        let delRes = tagRes.rows[0];
+        if (!delRes) throw new NotFoundError('Tag not found');
+    }
+
+
+}
+
+module.exports = Tags;
