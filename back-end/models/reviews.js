@@ -7,7 +7,8 @@ class Reviews {
 
     static async getUserReviews(user_id) {
         let reviewsRes = await db.query(
-            `SELECT title,
+            `SELECT id,
+                    title,
                     body
              FROM reviews
              WHERE users_id = $1`,
@@ -20,7 +21,8 @@ class Reviews {
 
     static async getSingleReview(post_id){
         let reviewsRes = await db.query(
-            `SELECT title,
+            `SELECT id,
+                    title,
                     body
              FROM reviews
              WHERE id = $1`,
@@ -34,7 +36,7 @@ class Reviews {
         return review;
     }
 
-    static async addReview(user_id) {
+    static async addReview({title, body, user_id}) {
         let reviewsRes = await db.query(
             `INSERT INTO reviews
                 (title, body, users_id)

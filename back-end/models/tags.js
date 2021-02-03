@@ -5,7 +5,7 @@ const { NotFoundError } = require("../expressError")
 
 class Tags {
 
-    static async addTag(user_id) {
+    static async addTag({type, user_id}) {
         let tagRes = await db.query(
             `INSERT INTO Tags
                 (type, users_id)
@@ -19,14 +19,14 @@ class Tags {
 
     }
 
-    static async deleteTag(like_id, user_id) {
+    static async deleteTag(tag_id, user_id) {
         let tagRes = await db.query(
             `DELETE 
              FROM likes
              WHERE id = $1
              AND users_id = $2
              RETURNING id`,
-             [like_id, user_id]
+             [tag_id, user_id]
         );
 
         let delRes = tagRes.rows[0];

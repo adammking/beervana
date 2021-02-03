@@ -7,7 +7,8 @@ class Posts {
 
     static async getUserPosts(user_id) {
         let postRes = await db.query(
-            `SELECT title,
+            `SELECT id,
+                    title,
                     body
              FROM posts
              WHERE users_id = $1`,
@@ -20,7 +21,8 @@ class Posts {
 
     static async getSinglePost(post_id){
         let postRes = await db.query(
-            `SELECT title,
+            `SELECT id,
+                    title,
                     body
              FROM posts
              WHERE id = $1`,

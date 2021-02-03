@@ -1,36 +1,37 @@
+
 "use strict";
 
-/** Routes for beers. */
+/** Routes for users. */
 
 const jsonschema = require("jsonschema")
 const express = require("express");
 const { ensureCorrectUser } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
-const { Beers } = require("../models/beers");
-const beerSearchSchema = require("../schemas/beerSearch")
+const { Breweries } = require("../models/beers");
+const brewerySearchSchema = require("../schemas/brewerySearch")
 const router = express.Router();
 
 router.get("/", ensureCorrectUser, async function(req, res, next) {
     
     const q = req.query;
     try {
-        const validator = jsonschema.validate(q, beerSearchSchema)
+        const validator = jsonschema.validate(q, brewerySearchSchema)
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
         }
 
-        const beers = await Beers.findAll(q)
-        return res.json({ beers })
+        const breweries = await Breweries.findAll(q)
+        return res.json({ breweries })
     } catch (err) {
         return next(err);
     }
 });
 
-router.get("/:beerId", ensureCorrectUser, async function(req, res, next) {
+router.get("/:breweryId", ensureCorrectUser, async function(req, res, next) {
     try {
-        const beer = await Beers.get(req.params.id)
-        return res.json({ beer })
+        const brewery = await Breweries.get(req.params.id)
+        return res.json({ brewery })
     } catch (err) {
         return next(err);
     }

@@ -71,10 +71,10 @@ class Users {
 
            const result = await db.query(
                `INSERT INTO users
-               (username, 
-                password,
-                first_name,
-                last_name)
+                    (username, 
+                    password,
+                    first_name,
+                    last_name)
                 VALUES ($1, $2, $3, $4)
                 RETURNING username, first_name AS "firstName, last_name AS "lastName`,
                 [
@@ -110,18 +110,16 @@ class Users {
         /** Given a username, return data about user.
          * 
          * Returns { username, first_name, last_name, posts, reviews } 
-         *  where posts is { id, title, body }
-         *  and reviews is { id, title, body }
-         *
+         *  
          * Throws NotFoundError if user not found.
          **/
    
         static async get(username) {
             const userRes = await db.query(
                 `SELECT id,
-                    username,
-                    first_name AS "firstName",
-                    last_name AS "lastName"
+                        username,
+                        first_name AS "firstName",
+                        last_name AS "lastName"
                 FROM users
                 WHERE username = $1`, 
                 [username]

@@ -5,7 +5,7 @@ const { NotFoundError } = require("../expressError")
 
 class Likes {
 
-    static async addLike(user_id, post_id) {
+    static async addLike({ post_id, user_id }) {
         let likeRes = await db.query(
             `INSERT INTO likes
                 (posts_id, users_id)

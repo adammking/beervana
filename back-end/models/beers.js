@@ -37,19 +37,19 @@ class Beers {
     return beersRes.rows;
   }
 
-  static async get(name) {
+  static async get(id) {
     const beerRes = await db.query(
         `SELECT id, 
                 name, 
                 descript,
                 abv
         FROM beers
-        WHERE name = $1`,
-        [name]
+        WHERE id = $1`,
+        [id]
     );
     const beer = beerRes.rows[0];
 
-    if (!beer) throw new NotFoundError(`No beer: ${name}`);
+    if (!beer) throw new NotFoundError(`Beer not found`);
 
     return beer;
   }
@@ -123,7 +123,7 @@ class Breweries {
    * Throws NotFoundError if not found.
    **/
 
-  static async get(name) {
+  static async get(id) {
     const breweryRes = await db.query(
         `SELECT name,
                 id,
@@ -136,11 +136,11 @@ class Breweries {
                 website
         FROM beers
         WHERE name = $1`,
-        [name]
+        [id]
     );
     const brewery = breweryRes.rows[0];
 
-    if (!brewery) throw new NotFoundError(`No beer: ${name}`);
+    if (!brewery) throw new NotFoundError(`Brewery not found`);
 
     const breweryBeersRes = await db.query(
         `SELECT name,
