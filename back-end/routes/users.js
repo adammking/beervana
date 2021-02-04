@@ -13,7 +13,7 @@ const Posts = require("../models/posts");
 const Reviews = require("../models/reviews")
 const Tags = require("../models/tags")
 
-const router = express.Router();
+const router = new express.Router();
 
 /** GET /[username] => { user }
  *
@@ -195,3 +195,5 @@ router.delete("/:username/tags/:id", ensureCorrectUser, async function(req, res,
         return next(err);
     }
 });
+
+module.exports = router;

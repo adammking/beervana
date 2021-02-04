@@ -34,19 +34,13 @@ class Beers {
 
     query += " ORDER BY name";
     const beersRes = await db.query(query, queryValues);
+    console.log(beersRes)
     return beersRes.rows;
   }
 
   static async get(id) {
-    const beerRes = await db.query(
-        `SELECT id, 
-                name, 
-                descript,
-                abv
-        FROM beers
-        WHERE id = $1`,
-        [id]
-    );
+    const beerRes = await db.query(`SELECT id, name, descript, abv FROM beers WHERE id = $1`,[id]);
+    console.log(beerRes)
     const beer = beerRes.rows[0];
 
     if (!beer) throw new NotFoundError(`Beer not found`);
@@ -74,7 +68,7 @@ class Breweries {
     let query = `SELECT name,
                         id,
                         descript AS "description", 
-                        address1,
+                        addressone,
                         city,
                         state,
                         country,
@@ -128,18 +122,18 @@ class Breweries {
         `SELECT name,
                 id,
                 descript AS "description", 
-                address1,
+                addressone,
                 city,
                 state,
                 country,
                 phone,
                 website
         FROM beers
-        WHERE name = $1`,
+        WHERE id = $1`,
         [id]
     );
     const brewery = breweryRes.rows[0];
-
+      console.log(breweryRes)
     if (!brewery) throw new NotFoundError(`Brewery not found`);
 
     const breweryBeersRes = await db.query(
@@ -158,4 +152,4 @@ class Breweries {
 
 }
 
-modules.exports = { Beers, Breweries};
+module.exports = { Beers, Breweries};

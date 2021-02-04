@@ -4,13 +4,13 @@
 
 const jsonschema = require("jsonschema")
 const express = require("express");
-const { ensureCorrectUser } = require("../middleware/auth");
+const { ensureLoggedIn } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const { Beers } = require("../models/beers");
 const beerSearchSchema = require("../schemas/beerSearch")
-const router = express.Router();
+const router = new express.Router();
 
-router.get("/", ensureCorrectUser, async function(req, res, next) {
+router.get("/", ensureLoggedIn, async function(req, res, next) {
     
     const q = req.query;
     try {
@@ -27,11 +27,14 @@ router.get("/", ensureCorrectUser, async function(req, res, next) {
     }
 });
 
-router.get("/:beerId", ensureCorrectUser, async function(req, res, next) {
+router.get("/:beerId", ensureLoggedIn, async function(req, res, next) {
     try {
         const beer = await Beers.get(req.params.id)
+        console.log(req.params.id)
         return res.json({ beer })
     } catch (err) {
         return next(err);
     }
 });
+
+module.exports = router;

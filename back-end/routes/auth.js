@@ -60,3 +60,4 @@ const { BadRequestError } = require("../expressError");
     };
  });
 
+module.exports = router;

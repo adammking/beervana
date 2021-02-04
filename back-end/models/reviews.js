@@ -1,6 +1,6 @@
 "use strict";
 
-const db = require = require("../db");
+const db = require("../db");
 const { NotFoundError } = require("../expressError")
 
 class Reviews {
