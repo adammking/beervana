@@ -16,7 +16,7 @@ const { BCRYPT_WORK_FACTOR } = require("../config.js");
 class Users {
  /** Authenticate user with username, password.
   * 
-  * Returns {username, first_name, last_name, }
+  * Returns {id, username, first_name, last_name, }
   *
   * Throws UnauthorizedError if user is not found or wrong password
   **/
@@ -24,7 +24,8 @@ class Users {
   static async authenticate(username, password) {
   //try to find the user first
     const result = await db.query(
-        `SELECT username,
+        `SELECT id,
+                username,
                 password,
                 first_name AS "firstName", 
                 last_name AS "lastName"
@@ -49,7 +50,7 @@ class Users {
 
   /** Register user with data.
    * 
-   * Returns { username, firstName, lastName }
+   * Returns { id, username, firstName, lastName }
    * 
    * Throws BadRequestError on duplicates.
    */

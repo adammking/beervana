@@ -19,14 +19,14 @@ class Reviews {
         return reviews;
     }
 
-    static async getSingleReview(post_id){
+    static async getSingleReview(review_id){
         let reviewsRes = await db.query(
             `SELECT id,
                     title,
                     body
              FROM reviews
              WHERE id = $1`,
-             [post_id]
+             [review_id]
         );
 
         let review = reviewsRes.rows[0];

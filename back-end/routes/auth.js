@@ -55,6 +55,7 @@ const { BadRequestError } = require("../expressError");
 
         const newUser = await Users.register(req.body);
         const token = createToken(newUser)
+        return res.json({ token })
     } catch (err) {
         return next(err);
     };

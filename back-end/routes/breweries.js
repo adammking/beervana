@@ -7,7 +7,7 @@ const jsonschema = require("jsonschema")
 const express = require("express");
 const { ensureLoggedIn } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
-const { Breweries } = require("../models/beers");
+const Breweries = require("../models/breweries");
 const brewerySearchSchema = require("../schemas/brewerySearch")
 const router = new express.Router();
 
@@ -28,7 +28,7 @@ router.get("/", ensureLoggedIn, async function(req, res, next) {
     }
 });
 
-router.get("/:breweryId", ensureLoggedIn, async function(req, res, next) {
+router.get("/:id", ensureLoggedIn, async function(req, res, next) {
     try {
         const brewery = await Breweries.get(req.params.id)
         return res.json({ brewery })

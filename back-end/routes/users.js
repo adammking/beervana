@@ -8,7 +8,8 @@ const express = require("express");
 const { ensureCorrectUser } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const Users = require("../models/users");
-const userUpdate = require("../schemas/userUpdate.json");
+const userUpdateSchema = require("../schemas/userUpdate");
+const newPostSchema = require("../schemas/postNew")
 const Posts = require("../models/posts");
 const Reviews = require("../models/reviews")
 const Tags = require("../models/tags")
@@ -46,7 +47,7 @@ router.get("/:username", ensureCorrectUser, async function(req, res, next) {
 
 router.patch("/:username", ensureCorrectUser, async function (req, res, next) {
   try {
-    const validator = jsonschema.validate(req.body, userUpdate);
+    const validator = jsonschema.validate(req.body, userUpdateSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
@@ -79,8 +80,7 @@ router.delete("/:username", ensureCorrectUser, async function (req, res, next) {
 
 router.get("/:username/posts", ensureCorrectUser, async function(req, res, next) {
     try {
-        const user = await Users.get(req.params.username);
-        const posts = await Posts.getUserPosts(user.id)
+        const posts = await Posts.getUserPosts(res.locals.user.id)
         return res.json({ posts })
     } catch (err) {
         return next(err);
@@ -89,12 +89,12 @@ router.get("/:username/posts", ensureCorrectUser, async function(req, res, next)
 
 router.post("/:username/posts", ensureCorrectUser, async function(req, res, next) {
     try {
-        const validator = jsonschema.validate(req.body, postNew);
+        const validator = jsonschema.validate(req.body, newPostSchema);
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
         }
-        const post = Posts.addPost(req.body)
+        const post = Posts.addPost({...req.body, user_id: res.locals.user.id})
         return res.status(201).json({ post })
     } catch (err) {
         return next(err);
@@ -103,7 +103,7 @@ router.post("/:username/posts", ensureCorrectUser, async function(req, res, next
 
 router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
     try {
-        const post = await Posts.getSinglePosts(req.params.id)
+        const post = await Posts.getSinglePost(req.params.id)
         return res.json({ post })
     } catch (err) {
         return next(err);
@@ -128,8 +128,7 @@ router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res
 
 router.get("/:username/reviews", ensureCorrectUser, async function(req, res, next) {
     try {
-        const user = await Users.get(req.params.username);
-        const reviews = await Reviews.getUserReviews(user.id)
+        const reviews = await Reviews.getUserReviews(res.locals.user.id)
         return res.json({ reviews })
     } catch (err) {
         return next(err);
@@ -138,12 +137,12 @@ router.get("/:username/reviews", ensureCorrectUser, async function(req, res, nex
 
 router.post("/:username/reviews", ensureCorrectUser, async function(req, res, next) {
     try {
-        const validator = jsonschema.validate(req.body, postNew);
+        const validator = jsonschema.validate(req.body, newPostSchema);
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
         }
-        const review = Reviews.addReview(req.body)
+        const review = Reviews.addReview({...req.body, user_id: res.locals.user.id})
         return res.status(201).json({ review })
     } catch (err) {
         return next(err);
@@ -176,7 +175,7 @@ router.delete("/:username/reviews/:id", ensureCorrectUser, async function(req, r
 
 router.post("/:username/tags", ensureCorrectUser, async function(req, res, next) {
     try {
-        const tag = await Tags.addTag(req.body)
+        const tag = await Tags.addTag({...req.body, user_id: res.locals.user.id})
         return res.status(201).json({ tag })
     } catch (err) {
         return next(err);
