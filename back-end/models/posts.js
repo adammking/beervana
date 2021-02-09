@@ -61,6 +61,8 @@ class Posts {
 
         let delPost = postRes.rows[0];
         if (!delPost) throw new NotFoundError('Post not found');
+
+        return `Post Deleted: ${delPost.title}`
     }
 
 

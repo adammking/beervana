@@ -61,6 +61,8 @@ class Reviews {
 
         let delReview = reviewsRes.rows[0];
         if (!delReview) throw new NotFoundError('Review not found');
+
+        return `Review Deleted: ${delReview.title}`
     }
 
 

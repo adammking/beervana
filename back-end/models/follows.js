@@ -1,7 +1,7 @@
 "use strict";
 
 const db = require("../db");
-const { NotFoundError, UnauthorizedError } = require("../expressError")
+const { BadRequestError } = require("../expressError");
 
 
 /** Functions for follow/following */
@@ -14,17 +14,16 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
          * 
          * */   
         
-        static async getFollowers(id) {
+        static async getFollowers(userId) {
 
             let followersRes = await db.query(
                 `SELECT users_following_id
                  FROM follows
                  WHERE users_being_followed_id = $1`,
-                 [id]
+                 [userId]
             )
 
-            let followers = followersRes.rows ? followersRes.rows : []
-
+            let followers = followersRes.rows ? followersRes.rows : [];
             return followers
         }
 
@@ -35,15 +34,14 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
          * 
          * */ 
 
-        static async getFollowing(id) {
+        static async getFollowing(userId) {
 
             let followingRes = await db.query(
                 `SELECT users_being_followed_id
                  FROM follows
                  WHERE users_following_id = $1`,
-                 [id]
+                 [userId]
             )
-
             let following = followingRes.rows ? followingRes.rows : []
 
             return following
@@ -58,8 +56,18 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
          * 
          * */ 
 
-        static async addFollows(followedId, followingId) {
-            if (followedId === followingId) return
+        static async addFollows(userId, followingId) {
+            if (userId === followingId) return new BadRequestError("Can not follow yourself")
+            let precheckRes = await db.query(
+                `SELECT users_being_followed_id,
+                        users_following_id
+                 FROM follows
+                 WHERE users_being_followed_id = $1
+                 AND users_following_id = $2`,
+                 [followingId, userId]
+            )
+            let precheck = precheckRes.rows
+            if (precheck.length > 0) return new BadRequestError("Duplicate Relation")
 
             let followRes = await db.query(
                 `INSERT INTO follows
@@ -67,9 +75,8 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
                              users_following_id)
                   VALUES ($1, $2)
                   RETURNING  users_being_followed_id`,
-                  [followedId, followingId]
+                  [followingId, userId]
             );
-
             let follow = followRes.rows[0]
             return follow                 
         }
@@ -83,8 +90,8 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
          * 
          * */ 
 
-        static async stopFollowing(followedId, followingId) {
-            if (followedId === followingId) return
+        static async stopFollowing(userId, followingId) {
+            if (userId === followingId) return new BadRequestError("Can not follow or unfollow yourself")
             
             let unfollowRes = await db.query(
                 `DELETE 
@@ -92,7 +99,7 @@ const { NotFoundError, UnauthorizedError } = require("../expressError")
                  WHERE users_being_followed_id = $1
                  AND users_following_id = $2
                  RETURNING users_being_followed_id`,
-                  [followedId, followingId]
+                  [userId, followingId]
             );
 
             let unfollow = unfollowRes.rows[0]

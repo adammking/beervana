@@ -98,9 +98,10 @@ class Users {
 
         static async findAll() {
             const result = await db.query(
-                `SELECT username,
+                `SELECT id,
+                        username,
                         first_name AS "firstName",
-                        last_name AS "lastName",
+                        last_name AS "lastName"
                 FROM users
                 ORDER BY username` 
             );
@@ -155,10 +156,9 @@ class Users {
              const { setCols, values } = sqlForPartialUpdate(
                  data,
                  {
-                     firstName: "first_name", 
-                     lastName: "last_name",
-                     username: "username"
-                 });
+                  firstName: "first_name", 
+                  lastName: "last_name"
+                });
             
             const usernameVarIdx = "$" + (values.length + 1);
 
@@ -166,8 +166,8 @@ class Users {
                               SET ${setCols}
                               WHERE username = ${usernameVarIdx}
                               RETURNING username,
-                                        first_name as "firstName"
-                                        last_name as "lastName"`;
+                                        first_name as "firstName",
+                                        last_name as "lastName"`
             const result = await db.query(querySql, [...values, username]);
             const user = result.rows[0];
 
@@ -186,12 +186,14 @@ class Users {
                  `DELETE 
                   FROM users
                   WHERE username = $1
-                  RETURN USERNAME`,
+                  RETURNING username`,
                   [username]
              );
              const user = result.rows[0];
 
              if (!user) throw new NotFoundError(`No user: ${username}`);
+
+             return `Deleted: ${user.username}`
          }
 
 }

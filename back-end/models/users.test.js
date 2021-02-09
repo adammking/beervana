@@ -70,18 +70,108 @@ describe("register", function () {
     })
 })
 
-// describe("findAll", function() {
+describe("findAll", function() {
+    test("works", async function() {
+        const users = await Users.findAll()
+        expect(users).toEqual([
+            {
+                id: expect.any(Number),
+                username: "u1",
+                firstName: "U1F",
+                lastName: "U1L"
+            },
+            {
+                id: expect.any(Number),
+                username: "u2",
+                firstName: "U2F",
+                lastName: "U2L"
+            }
+        ])
+    })
+})
 
-// })
+describe("get", function() {
+    test("works", async function () {
+        const user = await Users.get("u1")
+        expect(user).toEqual({
+                id: expect.any(Number),
+                username: "u1",
+                firstName: "U1F",
+                lastName: "U1L"
+        })
+    })
 
-// describe("get", function() {
+    test("throws not found error for invalid user", async function () {
+        try {
+            const user = await Users.get("fail")
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    })
+})
+
+describe("update", function() {
+    test("works for all values", async function() {
+        const update = await Users.update("u1", {username: "U1", firstName: "u1f", lastName: "u1l"})
+        expect(update).toEqual(
+            {
+                username: "U1", 
+                firstName: "u1f", 
+                lastName: "u1l"
+            })
+    })
+
+    test("works for username only", async function() {
+        const update = await Users.update("u1", {username: "U1"})
+        expect(update).toEqual(
+            {
+                username: "U1", 
+                firstName: "U1F", 
+                lastName: "U1L"
+            })
+    })
+
+    test("works for firstname only", async function() {
+        const update = await Users.update("u1", {firstName: "u1f"})
+        expect(update).toEqual(
+            {
+                username: "u1", 
+                firstName: "u1f", 
+                lastName: "U1L"
+            })
+    })
+
+    test("works for lastname only", async function() {
+        const update = await Users.update("u1", { lastName: "u1l"})
+        expect(update).toEqual(
+            {
+                username: "u1", 
+                firstName: "U1F", 
+                lastName: "u1l"
+            })
+    })
+
+    test("throws not found error for invalid user", async function () {
+        try {
+            const user = await Users.update("fail", {username: "pass"})
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    })
     
-// })
+})
 
-// describe("update", function() {
-    
-// })
+describe("delete", function() {
+    test("works", async function () {
+        const user = await Users.remove("u1")
+        expect(user).toEqual("Deleted: u1")
+    })
 
-// describe("delete", function() {
-    
-// })
+     test("throws not found error for invalid user", async function () {
+        try {
+            const user = await Users.remove("fail")
+        } catch (err) {
+            expect(err instanceof NotFoundError).toBeTruthy();
+        }
+    })
+})

@@ -2,7 +2,7 @@
 
 const db = require("../db");
 const { NotFoundError } = require("../expressError");
-const { Beers } = require("./beers");
+const Beers = require("./beers");
 
 const {
     commonBeforeAll,
