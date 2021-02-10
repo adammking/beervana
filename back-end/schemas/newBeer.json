@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/userAuth.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "brewery_id": {
+      "type": "integer"
+    },
+    "abv": {
+        "type": "string"
+    },
+    "ibu": {
+        "type": "string"
+    },
+    "descript": {
+        "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "name",
+    "brewery_id"
+  ]
+}

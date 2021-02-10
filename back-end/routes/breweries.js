@@ -37,4 +37,12 @@ router.get("/:id", ensureLoggedIn, async function(req, res, next) {
     }
 });
 
+router.post("/", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const newBrewery = await Breweries.add(req.body)
+    } catch (err) {
+        return next(err)
+    }
+})
+
 module.exports = router;

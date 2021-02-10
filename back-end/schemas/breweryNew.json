@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/userAuth.json",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "address1": {
+        "type": "string"
+    },
+    "state": {
+        "type": "string"
+    },
+    "country": {
+        "type": "string"
+    },
+    "phone": {
+        "type": "integer"
+    },
+    "website": {
+        "type": "string"
+    },
+    "descript": {
+        "type": "string"
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "name"
+  ]
+}

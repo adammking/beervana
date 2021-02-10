@@ -152,6 +152,49 @@ class Breweries {
 
             return brewery
     }
+
+
+
+  static async addBeer(breweryId, { name, brewery_id, abv, ibu, descript }) {
+  let brewInfo = await db.query(
+    `SELECT id, name
+     FROM breweries
+     WHERE id = $1`,
+     [breweryId]
+  )
+
+  brewery_id =  brewInfor.res.rows[0].id
+  let newBeerRes = await db.query(
+    `INSERT INTO beers (name, brewery_id, abv, ibu, descript)
+     VALUES ($1, $2, $3, $4, 
+             $5)
+     RETURNING name, abv, ibu, descript`,
+    [name, brewery_id, abv, ibu, descript]
+  )
+  let newBeer = newBeerRes.rows[0]
+  return newBeer
+};
+
+static async updateBeer(name, data) {
+     const { setCols, values } = sqlForPartialUpdate(
+                 data,
+                 {  
+                  description: "descript" });
+            
+            const nameVarIdx = "$" + (values.length + 1);
+
+            const querySql = `UPDATE beers
+                              SET ${setCols}
+                              WHERE name = ${nameVarIdx}
+                              RETURNING name, abv, ibu, descript AS "description"`
+
+            const result = await db.query(querySql, [...values, name]);
+            const brewery = result.rows[0];
+
+            if (!brewery) throw new NotFoundError(`No Brewery: ${name}`);
+
+            return brewery
+    }
 };
 
 
