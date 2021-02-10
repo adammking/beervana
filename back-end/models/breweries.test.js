@@ -148,7 +148,7 @@ describe("find single brewery", function() {
     })
 })
 
-describe("add", function() {
+describe("addBrewery", function() {
     test("works", async function() {
         let newBrew = await Breweries.add({name: "NewBrew1",
                                            descript: "NewDescript1", 
@@ -185,7 +185,7 @@ describe("add", function() {
         }
     })
 
-    describe("update", function() {
+    describe("updateBrewery", function() {
     test("works for all values", async function() {
         const update = await Breweries.update("testBrew1", {name: "TestBrewUp", 
                                                             city: "TestCityUp", 
