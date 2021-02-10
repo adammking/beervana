@@ -9,7 +9,13 @@ const { ensureLoggedIn } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const Breweries = require("../models/breweries");
 const brewerySearchSchema = require("../schemas/brewerySearch")
+const newBrewerySchema = require("../schemas/breweryNew")
+const breweryUpdateSchema = require("../schemas/breweryUpdate")
+const newBeerSchema = require("../schemas/beerNew")
+const beerUpdateSchema = require("../schemas/beerUpdate.json")
 const router = new express.Router();
+
+/**Routes for Breweries */
 
 router.get("/", ensureLoggedIn, async function(req, res, next) {
     
@@ -39,7 +45,61 @@ router.get("/:id", ensureLoggedIn, async function(req, res, next) {
 
 router.post("/", ensureLoggedIn, async function(req, res, next) {
     try {
+        const validator = jsonschema.validate(req.body, newBrewerySchema)
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
+
         const newBrewery = await Breweries.add(req.body)
+        return res.json(newBrewery)
+    } catch (err) {
+        return next(err)
+    }
+})
+
+router.patch("/:id", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const validator = jsonschema.validate(req.body, breweryUpdateSchema)
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
+
+        const updatedBrewery = await Breweries.update(req.params.id, req.body)
+        return res.json(updatedBrewery)
+    } catch (err) {
+        return next(err)
+    }
+})
+
+/**Routes for adding and updating beers (can only be done through brewery pages) */
+
+router.post("/:id/beers", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const validator = jsonschema.validate(req.body, beerUpdateSchema)
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
+
+        const newBreweryBeer = await Breweries.addBeer(req.params.id, req.body)
+        return res.json(newBreweryBeer)
+    } catch (err) {
+        return next(err)
+    }
+})
+
+router.patch("/:id/beers/:beername", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const validator = jsonschema.validate(req.body, updateBeerSchema)
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
+
+        const updatedBreweryBeer = await Breweries.updateBeer(req.params.id, req.body)
+        return res.json(updatedBreweryBeer)
     } catch (err) {
         return next(err)
     }

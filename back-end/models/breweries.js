@@ -131,24 +131,24 @@ class Breweries {
 };
 
 
-  static async update(name, data) {
+  static async update(id, data) {
      const { setCols, values } = sqlForPartialUpdate(
                  data,
                  {  
                   description: "descript" });
             
-            const nameVarIdx = "$" + (values.length + 1);
+            const idVarIdx = "$" + (values.length + 1);
 
             const querySql = `UPDATE breweries
                               SET ${setCols}
-                              WHERE name = ${nameVarIdx}
+                              WHERE id = ${idVarIdx}
                               RETURNING name, city, address1, address2, state, 
                country, code, phone, website, descript AS "description"`
 
-            const result = await db.query(querySql, [...values, name]);
+            const result = await db.query(querySql, [...values, id]);
             const brewery = result.rows[0];
 
-            if (!brewery) throw new NotFoundError(`No Brewery: ${name}`);
+            if (!brewery) throw new NotFoundError(`No Brewery: ${id}`);
 
             return brewery
     }
@@ -189,11 +189,11 @@ static async updateBeer(name, data) {
                               RETURNING name, abv, ibu, descript AS "description"`
 
             const result = await db.query(querySql, [...values, name]);
-            const brewery = result.rows[0];
+            const beer = result.rows[0];
 
-            if (!brewery) throw new NotFoundError(`No Brewery: ${name}`);
+            if (!beer) throw new NotFoundError(`No Beer: ${name}`);
 
-            return brewery
+            return beer
     }
 };
 
