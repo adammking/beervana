@@ -1,7 +1,7 @@
 "use strict";
 
 const db = require("../db");
-const { NotFoundError } = require("../expressError");
+const { NotFoundError, BadRequestError } = require("../expressError");
 const Breweries = require("./breweries");
 
 const {
@@ -145,5 +145,71 @@ describe("find single brewery", function() {
         } catch (err) {
             expect(err instanceof NotFoundError).toBeTruthy();
         }
+    })
+})
+
+describe("add", function() {
+    test("works", async function() {
+        let newBrew = await Breweries.add({name: "NewBrew1",
+                                           descript: "NewDescript1", 
+                                           address1: 'New test address1',
+                                           city: 'NewtestCity1',
+                                           state: 'NewtestState1',
+                                           country: "NewCountry",
+                                           phone: "NewPhone",
+                                           website: null});
+    expect(newBrew).toEqual({
+            name: "NewBrew1",
+            description: "NewDescript1", 
+            address1: 'New test address1',
+            city: 'NewtestCity1',
+            state: 'NewtestState1',
+            country: "NewCountry",
+            phone: "NewPhone",
+            website: null
+        })
+    })
+
+    test("throws error if brewery is in db", async function() {
+        try{
+            let newBrew = await Breweries.add({name: "NewBrew1",
+                                           descript: "NewDescript1", 
+                                           address1: 'New test address1',
+                                           city: 'NewtestCity1',
+                                           state: 'NewtestState1',
+                                           country: "NewCountry",
+                                           phone: "NewPhone",
+                                           website: null});
+        } catch (err) {
+            expect(err instanceof BadRequestError).toBeTruthy();
+        }
+    })
+
+    describe("update", function() {
+    test("works for all values", async function() {
+        const update = await Breweries.update("testBrew1", {name: "TestBrewUp", 
+                                                            city: "TestCityUp", 
+                                                            address1: "Test Address Update", 
+                                                            address2: "Test Address2 Update",
+                                                            state:"TestStateU", 
+                                                            code: "78974",
+                                                            country: "TestCountryUp",
+                                                            phone: "TestPhoneUp", 
+                                                            website: "testWebUp", 
+                                                            descript: "TestDescript11"})
+        expect(update).toEqual(
+            {
+                name: "TestBrewUp", 
+                city: "TestCityUp", 
+                address1: "Test Address Update", 
+                address2: "Test Address2 Update",
+                state:"TestStateU", 
+                code: "78974",
+                country: "TestCountryUp",
+                phone: "TestPhoneUp", 
+                website: "testWebUp", 
+                description: "TestDescript11"
+            })
+    })
     })
 })

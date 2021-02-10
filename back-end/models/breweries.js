@@ -2,8 +2,10 @@
 
 const db = require("../db");
 const {
-    NotFoundError 
+    NotFoundError, BadRequestError 
 } = require("../expressError");
+const { sqlForPartialUpdate } = require("../helpers/sql");
+
 
 
 class Breweries {
@@ -62,7 +64,7 @@ class Breweries {
     query += " ORDER BY name";
     const breweriesRes = await db.query(query, queryValues);
     return breweriesRes.rows;
-  }
+  };
 
   /** Given a brewery name, return data about brewery.
    *
@@ -102,8 +104,55 @@ class Breweries {
     brewery.beers = breweryBeersRes.rows;
 
     return brewery;
-  }
+  };
 
-}
+  static async add({ name, city, address1, state, 
+                             country, phone, website, descript}) {
+  let precheckRes = await db.query(
+    `SELECT name
+     FROM breweries
+     WHERE name = $1`,
+     [name]
+  )
+
+  if (!precheckRes.rows.length === 0) return new BadRequestError(`Brewery Exists: ${name}`)
+  
+  let newBrewRes = await db.query(
+    `INSERT INTO breweries (name, city, address1, state,
+                             country, phone, website, descript)
+     VALUES ($1, $2, $3, $4, 
+             $5, $6, $7, $8)
+     RETURNING name, city, address1, state, 
+               country, phone, website, descript AS "description"`,
+    [name, city, address1, state, country, phone, website, descript]
+  )
+  let newBrew = newBrewRes.rows[0]
+  return newBrew
+};
+
+
+  static async update(name, data) {
+     const { setCols, values } = sqlForPartialUpdate(
+                 data,
+                 {  
+                  description: "descript" });
+            
+            const nameVarIdx = "$" + (values.length + 1);
+
+            const querySql = `UPDATE breweries
+                              SET ${setCols}
+                              WHERE name = ${nameVarIdx}
+                              RETURNING name, city, address1, address2, state, 
+               country, code, phone, website, descript AS "description"`
+
+            const result = await db.query(querySql, [...values, name]);
+            const brewery = result.rows[0];
+
+            if (!brewery) throw new NotFoundError(`No Brewery: ${name}`);
+
+            return brewery
+    }
+};
+
 
 module.exports = Breweries;

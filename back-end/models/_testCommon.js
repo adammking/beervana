@@ -81,8 +81,6 @@ async function commonBeforeAll() {
          VALUES ('TestTag1', $1),
                 ('TestTag2', $2)`, 
                 [testUserIds[0], testUserIds[1]])
-
-    
 }
 
 

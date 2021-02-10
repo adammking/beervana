@@ -18,8 +18,7 @@ const router = new express.Router();
 
 /** GET /[username] => { user }
  *
- * Returns { username, firstName, lastName, isAdmin, jobs }
- *   where jobs is { id, title, companyHandle, companyName, state }
+ * Returns { username, firstName, lastName }
  *
  * Authorization required: same user-as-:username
  **/
@@ -40,7 +39,7 @@ router.get("/:username", ensureCorrectUser, async function(req, res, next) {
  * Data can include:
  *   { firstName, lastName, password, username }
  *
- * Returns { username, firstName, lastName, email, isAdmin }
+ * Returns { username, firstName, lastName, email }
  *
  * Authorization required: same-user-as-:username
  **/
@@ -78,6 +77,14 @@ router.delete("/:username", ensureCorrectUser, async function (req, res, next) {
 
 /** User Routes for Posts */
 
+/** GET /[username]/posts => [ { post }, { post }...]
+ *
+ * Returns { { id, title, body }, ...]
+ *   
+ *
+ * Authorization required: same user-as-:username
+ **/
+
 router.get("/:username/posts", ensureCorrectUser, async function(req, res, next) {
     try {
         const posts = await Posts.getUserPosts(res.locals.user.id)
@@ -100,6 +107,13 @@ router.post("/:username/posts", ensureCorrectUser, async function(req, res, next
         return next(err);
     }
 });
+
+/** GET /[username]/posts/[postId] => { post }
+ *
+ * Returns { id, title, body }
+ *
+ * Authorization required: same user-as-:username
+ **/
 
 router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
     try {
@@ -126,6 +140,13 @@ router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res
 
 /** User Routes for Reviews */
 
+/** GET /[username]/reviews => [ { review }, { review }...]
+ *
+ * Returns { id, title, body }
+ *
+ * Authorization required: same user-as-:username
+ **/
+
 router.get("/:username/reviews", ensureCorrectUser, async function(req, res, next) {
     try {
         const reviews = await Reviews.getUserReviews(res.locals.user.id)
@@ -149,6 +170,14 @@ router.post("/:username/reviews", ensureCorrectUser, async function(req, res, ne
     }
 });
 
+/** GET /[username]/reviews/[reviewId] => { post }
+ *
+ * Returns { username, firstName, lastName, isAdmin, jobs }
+ *   where jobs is { id, title, companyHandle, companyName, state }
+ *
+ * Authorization required: same user-as-:username
+ **/
+
 router.get("/:username/reviews/:id", ensureCorrectUser, async function(req, res, next) {
     try {
         const review = await Reviews.getSingleReview(req.params.id)
@@ -170,6 +199,7 @@ router.delete("/:username/reviews/:id", ensureCorrectUser, async function(req, r
         return next(err);
     }
 });
+
 
 /** User Routes for Tags */
 
