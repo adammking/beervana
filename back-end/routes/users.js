@@ -13,7 +13,8 @@ const newPostSchema = require("../schemas/postNew")
 const Posts = require("../models/posts");
 const Reviews = require("../models/reviews")
 const Tags = require("../models/tags")
-const Follows = require("../models/follows")
+const Follows = require("../models/follows");
+const Likes = require("../models/likes");
 
 const router = new express.Router();
 
@@ -159,7 +160,9 @@ router.post("/:username/posts", ensureCorrectUser, async function(req, res, next
 router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
     try {
         const post = await Posts.getSinglePost(req.params.id)
-        return res.json({ post })
+        const likes = await Likes.getLikes(req.params.id)
+        
+        return res.json({ post, likes })
     } catch (err) {
         return next(err);
     }
@@ -178,6 +181,7 @@ router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res
         return next(err);
     }
 });
+
 
 /** User Routes for Reviews */
 
@@ -265,5 +269,7 @@ router.delete("/:username/tags/:id", ensureCorrectUser, async function(req, res,
         return next(err);
     }
 });
+
+
 
 module.exports = router;
