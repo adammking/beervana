@@ -13,6 +13,7 @@ const newPostSchema = require("../schemas/postNew")
 const Posts = require("../models/posts");
 const Reviews = require("../models/reviews")
 const Tags = require("../models/tags")
+const Follows = require("../models/follows")
 
 const router = new express.Router();
 
@@ -52,7 +53,7 @@ router.patch("/:username", ensureCorrectUser, async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    const user = await User.update(req.params.username, req.body);
+    const user = await Users.update(req.params.username, req.body);
     return res.json({ user });
   } catch (err) {
     return next(err);
@@ -68,12 +69,52 @@ router.patch("/:username", ensureCorrectUser, async function (req, res, next) {
 
 router.delete("/:username", ensureCorrectUser, async function (req, res, next) {
   try {
-    await User.remove(req.params.username);
+    await Users.remove(req.params.username);
     return res.json({ deleted: req.params.username });
   } catch (err) {
     return next(err);
   }
 });
+
+/**User Routes for followers */
+
+router.get("/:username/followers", ensureCorrectUser, async function(req, res, next){
+    try {
+        const followers = await Follows.getFollowers(res.locals.user.id)
+        return res.json({ followers })
+    } catch (err) {
+        return next(err)
+    }
+})
+
+router.get("/:username/following", ensureCorrectUser, async function(req, res, next){
+    try {
+        const following = await Follows.getFollowing(res.locals.user.id)
+        return res.json({ following })
+    } catch (err) {
+        return next(err)
+    }
+})
+
+router.post("/:username/follow", ensureCorrectUser, async function(req, res, next){
+    try {
+        const { id } = req.body;
+        const newFollow = await Follows.addFollows(res.locals.user.id, id)
+        return res.json({ newFollow })
+    } catch (err) {
+        return next(err)
+    }
+})
+
+router.delete("/:username/follow", ensureCorrectUser, async function(req, res, next){
+    try {
+        const { id } = req.body;
+        const delFollow = await Follows.stopFollowing(res.locals.user.id, id0)
+        return res.json({ delFollow })
+    } catch (err) {
+        return next(err)
+    }
+})
 
 /** User Routes for Posts */
 
