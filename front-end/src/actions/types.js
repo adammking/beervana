@@ -2,7 +2,7 @@
 /**User Actions */
 export const GET_USER = "GET_USER";
 export const REGISTER_USER = "REGISTER_USER";
-export const AUTH_USER = "AUTH_USER";
+export const GET_TOKEN = "GET_TOKEN";
 export const FIND_ALL_USERS = "FIND_ALL_USERS"
 export const UPDATE_USER = "UPDATE_USER"
 export const REMOVE_USER = "REMOVE_USER"
@@ -34,11 +34,11 @@ export const DELETE_TAG = "DELETE_TAG"
 
 
 /**Beer Actions */
-export const FIND_ALL_BEERS = "FIND_ALL_BEERS"
+export const SEARCH_BEERS = "SEARCH_BEERS"
 export const GET_BEER = "GET_BEER"
 
 /**Brewery Actions */
-export const FIND_ALL_BREWERIES = "FIND_ALL_BREWERIES"
+export const SEARCH_BREWERIES = "SEARCH_BREWERIES"
 export const GET_BREWERY = "GET_BREWERY"
 export const ADD_BREWERY = "ADD_BREWERY"
 export const UPDATE_BREWERY = "UPDATE_BREWERY"

@@ -31,7 +31,7 @@ export function getUserFromApi(username){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getUser(response.data))
     }
@@ -50,7 +50,7 @@ export function getAllUsersFromApi(){
         const response = await axios({method: "GET",
                                       url: `${API_URL}`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(findAllUsers(response.data))
     }
@@ -70,7 +70,7 @@ export function updateUserFromApi(username, data){
                                       url: `${API_URL}/${username}`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(updateUser(response.data))
     }
@@ -89,7 +89,7 @@ export function deleteUserFromApi(username){
                                       url: `${API_URL}/${username}`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(removeUser(response.data))
     }
@@ -107,7 +107,7 @@ export function getFollowersFromApi(username){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/followers`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getFollowers(response.data))
     }
@@ -125,7 +125,7 @@ export function getFollowingFromApi(username){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/following`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getFollowing(response.data))
     }
@@ -144,7 +144,7 @@ export function addFollowWithApi(username, data){
                                       url: `${API_URL}/${username}/follow`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(addFollow(response.data))
     }
@@ -163,7 +163,7 @@ export function deleteFollowFromApi(username, data){
                                       url: `${API_URL}/${username}/follow`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(removeFollow(response.data))
     }
@@ -182,7 +182,7 @@ export function getLikesFromApi(postId){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getLikeCount(response.data))
     }
@@ -201,7 +201,7 @@ export function addLikesWithApi(username, postId){
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(addLike(response.data))
     }
@@ -221,7 +221,7 @@ export function deleteLikesFromApi(username, data){
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(removeLike(response.data))
     }
@@ -241,7 +241,7 @@ export function getAllPostsFromApi(username){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getAllPosts(response.data))
     }
@@ -260,7 +260,7 @@ export function getSinglePostFromApi(username, postId){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${postId}`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getPost(response.data))
     }
@@ -279,7 +279,7 @@ export function addPostWithApi(username, data){
                                       url: `${API_URL}/${username}/posts`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(addPost(response.data))
     }
@@ -298,7 +298,7 @@ export function deletePostsFromApi(username, postId){
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(deletePost(response.data))
     }
@@ -316,7 +316,7 @@ export function getAllReviewsFromApi(username){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/reviews`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getAllReviews(response.data))
     }
@@ -334,7 +334,7 @@ export function getSingleReviewFromApi(username, reviewId){
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${reviewId}`, 
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(getReview(response.data))
     }
@@ -353,7 +353,7 @@ export function addReviewWithApi(username, data){
                                       url: `${API_URL}/${username}/reviews`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(addReview(response.data))
     }
@@ -372,7 +372,7 @@ export function deletePostsFromApi(username, reviewId){
                                       url: `${API_URL}/${username}/reviews/${reviewId}`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(deleteReview(response.data))
     }
@@ -391,7 +391,7 @@ export function addTagWithApi(username, data){
                                       url: `${API_URL}/${username}/tags`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(addTag(response.data))
     }
@@ -410,7 +410,7 @@ export function deletePostsFromApi(username, tagId){
                                       url: `${API_URL}/${username}/tags/${tagId}`, 
                                       data: data,
                                       headers: {
-                                          Authorization: 'Bearer' + token
+                                        Authorization: `Bearer ${token}` 
                                       }})
         return dispatch(deleteTag(response.data))
     }
