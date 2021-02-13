@@ -110,7 +110,7 @@ router.post("/:username/follow", ensureCorrectUser, async function(req, res, nex
 router.delete("/:username/follow", ensureCorrectUser, async function(req, res, next){
     try {
         const { id } = req.body;
-        const delFollow = await Follows.stopFollowing(res.locals.user.id, id0)
+        const delFollow = await Follows.stopFollowing(res.locals.user.id, id)
         return res.json({ delFollow })
     } catch (err) {
         return next(err)
@@ -160,9 +160,8 @@ router.post("/:username/posts", ensureCorrectUser, async function(req, res, next
 router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
     try {
         const post = await Posts.getSinglePost(req.params.id)
-        const likes = await Likes.getLikes(req.params.id)
         
-        return res.json({ post, likes })
+        return res.json({ post })
     } catch (err) {
         return next(err);
     }
@@ -181,6 +180,43 @@ router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res
         return next(err);
     }
 });
+
+/** User Routes for Post likes */
+
+router.get("/:username/posts/:id/likes", ensureCorrectUser, async function(req, res, next) {
+    try {
+        const likes = await Likes.getLikes(req.params.id)
+        
+        return res.json({ likes })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.post("/:username/posts/:id/likes", ensureCorrectUser, async function(req, res, next) {
+    try {
+        let postId = req.params.id
+        let userId = res.locals.user.id
+        const likes = await Likes.addLike({postId, userId})
+        return res.json({ likes })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+router.delete("/:username/posts/:id/likes", ensureCorrectUser, async function(req, res, next) {
+    try {
+        let postId = req.params.id
+        let userId = res.locals.user.id
+        const likes = await Likes.deleteLike({postId, userId})
+        return res.json({ likes })
+    } catch (err) {
+        return next(err);
+    }
+});
+
+
+
 
 
 /** User Routes for Reviews */
