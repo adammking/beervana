@@ -84,7 +84,7 @@ export function addBreweryFromApi(data){
 
 function addBrewery(data) {
     return {
-        type: ADD_BREWERY,
+        type: UPDATE_BEER_IN_BREWERY,
         data 
     }
 }
@@ -116,11 +116,11 @@ export function updateBeerInBreweryFromApi(id, name, data){
                                       headers: {
                                           Authorization: `Bearer ${token}` 
                                       }})
-        return dispatch(updateBrewery(response.data))
+        return dispatch(updateBeerInBrewery(response.data))
     }
 }
 
-function updateBrewery(data) {
+function updateBeerInBrewery(data) {
     return {
         type: UPDATE_BREWERY,
         data 
