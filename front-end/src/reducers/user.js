@@ -27,16 +27,16 @@ export default function rootReducer(state={}, action) {
 
     switch (action.type) {
         case GET_USER:
-            return
+            return { ...state, [action.data.id]: action.data };
 
         case FIND_ALL_USERS:
-            return;
+            return { ...state, [users]: action.data }
 
         case UPDATE_USER:
-            return
+            return {...state, [action.user.id]: action.data}
 
         case REMOVE_USER:
-            return;
+            return {...state }
 
         case ADD_FOLLOW:
             return;
@@ -62,7 +62,7 @@ export default function rootReducer(state={}, action) {
         case GET_ALL_POSTS:
             return;
 
-        case REMOVE_USER:
+        case GET_POST:
             return;
 
         case ADD_FOLLOW:
@@ -71,8 +71,11 @@ export default function rootReducer(state={}, action) {
         case ADD_POST:
             return;
 
+        case DELETE_POST:
+            return;
+
         case GET_ALL_REVIEWS:
-            return
+            return;
 
         case GET_REVIEW:
             return;
