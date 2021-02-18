@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-import Cart from "./Cart";
-import ProductDetails from "./ProductDetails";
+import Home from "./Home";
+import RegisterForm from "./RegisterForm";
 import ProductList from "./ProductList";
 
 function Routes() {
@@ -11,9 +11,9 @@ function Routes() {
         <Home />
       </Route>
       <Route path="/register" exact>
-        <Register />
+        <RegisterForm />
       </Route>
-      <Route path="/users/" exact>
+      <Route path="/users" exact>
         <UserList />
       </Route>
       <Route path="/users/:usename" exact>
@@ -43,7 +43,7 @@ function Routes() {
       <Route path="/breweries/:id" exact>
         <Brewery />
       </Route>
-      <Redirect to="/" />
+      <Redirect to="/login" />
     </Switch>
   );
 }
