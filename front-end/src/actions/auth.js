@@ -11,11 +11,11 @@ GET_TOKEN
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/auth"
 
 
-export function getTokenFromApi(data){
+export function getTokenFromApi({data}){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/token`, 
-                                      data: data,
+                                      data,
                                     })
         return dispatch(getToken(response.data))
     }

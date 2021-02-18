@@ -2,6 +2,16 @@ import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 import Home from "./components/Home";
 import RegisterForm from "./components/RegisterForm";
+import UserList from "./components/UserList"
+import User from "./components/User"
+import PostList from "./components/PostList"
+import Post from "./components/Post"
+import ReviewList from "./components/ReviewList"
+import Review from "./components/Review"
+import BeerList from "./components/BeerList"
+import Beer from "./components/Beer"
+import BreweryList from "./components/BreweryList"
+import Brewery from "./components/Brewery"
 
 function Routes() {
   return (
@@ -16,7 +26,7 @@ function Routes() {
         <UserList />
       </Route>
       <Route path="/users/:usename" exact>
-        <UserPofile />
+        <User />
       </Route>
       <Route path="/users/:usename/posts" exact>
         <PostList />

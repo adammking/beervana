@@ -33,7 +33,8 @@ function getBeer(data) {
 export function searchBeersFromApi(data){
     return async function(dispatch) {
         const response = await axios({method: "GET",
-                                      url: `${API_URL}/${data}`, 
+                                      url: `${API_URL}/`, 
+                                      params: data,
                                       headers: {
                                           Authorization: `Bearer ${token}` 
                                       }})

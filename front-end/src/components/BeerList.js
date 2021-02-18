@@ -1,8 +1,15 @@
 import React from 'react';
 import Beer from "./Beer";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function BeerList(data) {
-    const beers = data;
+function BeerList() {
+
+    const dispatch = useDispatch();
+
+
+
+    const beers = useSelector(st => st.beers) ;
 
     return (
         <div>

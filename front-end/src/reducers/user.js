@@ -27,70 +27,70 @@ export default function rootReducer(state={}, action) {
 
     switch (action.type) {
         case GET_USER:
-            return { ...state, [action.data.id]: action.data };
+            return { ...state, [action.data]: action.data };
 
         case FIND_ALL_USERS:
-            return { ...state, [action.data]: action.data }
+            return { ...state, [action.data]: action.data };
 
         case UPDATE_USER:
-            return {...state, [action.user.id]: action.data}
+            return {...state, [action.data]: action.data};
 
         case REMOVE_USER:
-            return {...state }
+            return {...state, [action.data]: action.data};
 
         case ADD_FOLLOW:
-            return;
+            return {...state, [action.data]: action.data};
 
         case REMOVE_FOLLOW:
-            return;
+            return {...state, [action.data]: action.data};
 
         case GET_FOLLOWERS:
-            return
+            return {...state, [action.data]: action.data};
 
         case GET_FOLLOWING:
-            return;
+            return {...state, [action.data]: action.data};
 
         case ADD_LIKE:
-            return
+            return {...state, [action.data]: action.data};
 
         case GET_LIKE_COUNT:
-            return;
+            return {...state, [action.data]: action.data};
 
         case REMOVE_LIKE:
-            return;
+            return{...state, [action.data]: action.data};
 
         case GET_ALL_POSTS:
-            return;
+            return {...state, [action.data]: action.data};
 
         case GET_POST:
-            return;
+            return {...state, [action.data]: action.data};
 
         case ADD_FOLLOW:
-            return;
+            return {...state, [action.data]: action.data};
 
         case ADD_POST:
-            return;
+            return {...state, [action.data]: action.data};
 
         case DELETE_POST:
-            return;
+            return {...state, [action.data]: action.data};
 
         case GET_ALL_REVIEWS:
-            return;
+            return {...state, [action.data]: action.data};
 
         case GET_REVIEW:
-            return;
+            return {...state, [action.data]: action.data};
 
         case ADD_REVIEW:
-            return
+            return {...state, [action.data]: action.data};
 
         case DELETE_REVIEW:
-            return;
+            return {...state, [action.data]: action.data};
 
         case ADD_TAG:
-            return;
+            return {...state, [action.data]: action.data};
 
         case DELETE_TAG:
-            return;
+            return {...state, [action.data]: action.data};
         
         default:
             return state;
