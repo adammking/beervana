@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { useDispatch } from "react-redux";
 import { getTokenFromApi } from "../actions/auth";
 import LoginForm from "./LoginForm"
@@ -7,8 +7,7 @@ function Home() {
     const dispatch = useDispatch();
     
     function login(data) {
-        let token = dispatch(getTokenFromApi(data));
-        localStorage.setItem("token", token)
+        dispatch(getTokenFromApi(data));
     }
 
     return (

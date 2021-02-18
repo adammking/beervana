@@ -1,8 +1,7 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-import Home from "./Home";
-import RegisterForm from "./RegisterForm";
-import ProductList from "./ProductList";
+import Home from "./components/Home";
+import RegisterForm from "./components/RegisterForm";
 
 function Routes() {
   return (

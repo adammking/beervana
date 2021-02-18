@@ -8,10 +8,10 @@ export default function rootReducer(state={}, action) {
 
     switch (action.type) {
         case REGISTER_USER:
-            return
+            return state;
 
         case GET_TOKEN:
-            return;
+            return state;
         
         default:
             return state;
