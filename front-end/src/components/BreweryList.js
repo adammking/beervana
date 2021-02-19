@@ -1,6 +1,5 @@
-import React from 'react';
 import Brewery from "./Brewery";
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { searchBreweriesFromApi } from '../actions/brewery';
 import Search from "./Search"

@@ -6,7 +6,7 @@ import useLocalStorage from './hooks/useLocalStorage';
 
 function App() {
 
-  let [ token, setToken ] = useLocalStorage("token")
+  useLocalStorage("token")
 
 
   return (

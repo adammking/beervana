@@ -24,7 +24,6 @@ ADD_TAG,
 DELETE_TAG
 
 } from "../actions/types" 
-import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function rootReducer(state = { user: {id: "", 
                                                      username: "",
@@ -38,12 +37,10 @@ export default function rootReducer(state = { user: {id: "",
     switch (action.type) {
 
         case REGISTER_USER:
-            useLocalStorage("token", action.token)
-            return {...state, [token]: action.token};
+            return {...state, token: action.token};
 
         case GET_TOKEN:
-            useLocalStorage("token", action.token)
-            return {...state, [token]: action.token};
+            return {...state, token: action.token};
 
         case GET_USER:
             return { ...state, user: action.data };
@@ -82,9 +79,6 @@ export default function rootReducer(state = { user: {id: "",
             return {...state, [action.data]: action.data};
 
         case GET_POST:
-            return {...state, [action.data]: action.data};
-
-        case ADD_FOLLOW:
             return {...state, [action.data]: action.data};
 
         case ADD_POST:

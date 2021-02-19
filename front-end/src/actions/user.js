@@ -88,7 +88,7 @@ export function deleteUserFromApi(username){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}`, 
-                                      data: data,
+                                      data: username,
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
@@ -178,7 +178,7 @@ function removeFollow(data) {
 }
 
 
-export function getLikesFromApi(postId){
+export function getLikesFromApi(username, postId){
     return async function(dispatch) {
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
@@ -196,7 +196,7 @@ function getLikeCount(data) {
     }
 }
 
-export function addLikesWithApi(username, postId){
+export function addLikesWithApi(username, postId, data){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
@@ -216,7 +216,7 @@ function addLike(data) {
 }
 
 
-export function deleteLikesFromApi(username, data){
+export function deleteLikesFromApi(username, postId, data){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
@@ -293,7 +293,7 @@ function addPost(data){
     }
 }
 
-export function deletePostsFromApi(username, postId){
+export function deletePostsFromApi(username, postId, data){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
@@ -367,7 +367,7 @@ function addReview(data){
     }
 }
 
-export function deletePostsFromApi(username, reviewId){
+export function deleteReviewsFromApi(username, reviewId, data){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/reviews/${reviewId}`, 
@@ -405,7 +405,7 @@ function addTag(data){
     }
 }
 
-export function deletePostsFromApi(username, tagId){
+export function deleteTagsFromApi(username, tagId, data){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/tags/${tagId}`, 

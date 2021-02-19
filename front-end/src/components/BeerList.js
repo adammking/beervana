@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Beer from "./Beer";
 import { useDispatch, useSelector } from "react-redux";
 import { searchBeersFromApi } from '../actions/beers';

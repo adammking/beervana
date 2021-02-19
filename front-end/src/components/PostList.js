@@ -3,7 +3,6 @@ import React, { useEffect }from "react";
 import Post from "./Post"
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPostsFromApi } from '../actions/user';
-import Search from "./Search"
 
 function PostList() {
     

@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 function User({data}) {
 
     const {id, username, posts, reviews, followers, following } = data;
     
-    const posts = posts.map(p => (<><h1>p.title</h1>
-                                  <p>p.body</p></>))
 
     return(
         <div id={id}>

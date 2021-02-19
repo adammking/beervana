@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Search.css";
 
 function Search({ searchFor, view }) {
   const [search, setSearch] = useState({
@@ -28,6 +27,7 @@ function Search({ searchFor, view }) {
         country: search.country
       };
     }
+    setSearch(data)
     searchFor(search);
   }
 

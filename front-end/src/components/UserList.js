@@ -1,7 +1,7 @@
-import React from 'react';
-import { getAllUsersFromApi } from "./actions/user"
-
-
+import React, { useEffect } from 'react';
+import { getAllUsersFromApi } from "../actions/user"
+import { useDispatch, useSelector } from "react-redux";
+import User from "./User"
 
 function UserList() {
 
