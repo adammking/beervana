@@ -9,6 +9,7 @@ GET_BEER
 } from "./types" 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/beers"
+const token = localStorage.getItem("token")
 
 
 export function getBeerFromApi(id){

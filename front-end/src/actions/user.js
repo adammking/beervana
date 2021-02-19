@@ -25,6 +25,7 @@ DELETE_TAG
 } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/users"
+const token = localStorage.getItem("token")
 
 export function getUserFromApi(username){
     return async function(dispatch) {

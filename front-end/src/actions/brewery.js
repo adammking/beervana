@@ -11,6 +11,7 @@ UPDATE_BEER_IN_BREWERY
 } from "./types" 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/breweries"
+const token = localStorage.getItem("token")
 
 
 export function getBreweryFromApi(id){
@@ -85,7 +86,7 @@ export function addBreweryFromApi(data){
 
 function addBrewery(data) {
     return {
-        type: UPDATE_BEER_IN_BREWERY,
+        type: ADD_BREWERY,
         data 
     }
 }
@@ -123,7 +124,7 @@ export function updateBeerInBreweryFromApi(id, name, data){
 
 function updateBeerInBrewery(data) {
     return {
-        type: UPDATE_BREWERY,
+        type: UPDATE_BEER_IN_BREWERY,
         data 
     }
 }
