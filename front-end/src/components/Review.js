@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Review() {
+function Review({data}) {
 
     const { title, body } = data;
 

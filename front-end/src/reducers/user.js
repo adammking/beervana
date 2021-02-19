@@ -1,4 +1,6 @@
 import { 
+REGISTER_USER,
+GET_TOKEN,
 GET_USER,
 FIND_ALL_USERS, 
 UPDATE_USER,
@@ -23,17 +25,31 @@ DELETE_TAG
 
 } from "../actions/types" 
 
-export default function rootReducer(state={}, action) {
+export default function rootReducer(state = { user: {id: "", 
+                                                     username: "",
+                                                     posts: [],
+                                                     reviews: [],
+                                                     followers: [], 
+                                                     following: [],
+                                                    },
+                                              token: ""  }, action) {
 
     switch (action.type) {
+
+        case REGISTER_USER:
+            return {...state, [token]: action.token};
+
+        case GET_TOKEN:
+            return {...state, [token]: action.token};
+
         case GET_USER:
-            return { ...state, [action.data]: action.data };
+            return { ...state, user: action.data };
 
         case FIND_ALL_USERS:
-            return { ...state, [action.data]: action.data };
+            return { ...state, [action.users]: action.data };
 
         case UPDATE_USER:
-            return {...state, [action.data]: action.data};
+            return {...state, user: action.data};
 
         case REMOVE_USER:
             return {...state, [action.data]: action.data};

@@ -1,11 +1,11 @@
 import React from 'react';
 
 function Beer({data}) {
-    const { name, brewery, ibu, abv, descript } = data
+    const { id, name, brewery, ibu, abv, descript } = data
 
 
     return (
-        <div>
+        <div id={id}>
             <h1>{name}</h1>
             <aside>{brewery}</aside>
             <h4>{ibu}</h4>

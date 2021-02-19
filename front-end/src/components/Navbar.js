@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+    const user = useSelector(st => st.user.username)
+    const token = useSelector(st => st.token);
+
   return (
     <nav className="navbar navbar-light bg-info">
       <Link to="/login" className="navbar-brand text-light">

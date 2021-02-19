@@ -3,11 +3,11 @@ import React from 'react';
 function UpdateBeerForm() {
 
     const [beerData, setBeerData] = useState({
-        name, 
+        name:"", 
         brewery_id: `${breweryName}`, 
-        abv, 
-        ibu, 
-        descript
+        abv: "", 
+        ibu: "", 
+        descript: ""
     });
 
     function handleChange(evt) {

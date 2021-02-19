@@ -3,8 +3,8 @@ import React from 'react';
 function NewPostRevForm() {
 
     const [postRevData, setPostRevData] = useState({
-        title,
-        body
+        title: "",
+        body: ""
     });
 
     function handleChange(evt) {

@@ -1,12 +1,12 @@
 import React from 'react';
 
-function RegisterForm() {
+function RegisterForm(register) {
 
     const [userData, setUserData] = useState({
-        username,
-        password,
-        firstName,
-        lastName
+        username: "",
+        password: "",
+        firstName: "",
+        lastName: ""
     });
 
     function handleChange(evt) {
@@ -19,7 +19,7 @@ function RegisterForm() {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        add(userData);
+        register(userData);
     }
 
 
@@ -63,7 +63,7 @@ function RegisterForm() {
                         value={userData.lastName}/>
             </div>
 
-            <button>Login</button>
+            <button type="submit">Regiser</button>
 
         </form>
     )

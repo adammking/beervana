@@ -4,7 +4,7 @@ GET_BEER
 
 } from "../actions/types" 
 
-export default function rootReducer(state={beers: []}, action) {
+export default function rootReducer(state = { beers: [] }, action) {
 
     switch (action.type) {
         case SEARCH_BEERS:

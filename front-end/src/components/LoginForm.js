@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 
-function LoginForm() {
+function LoginForm({login}) {
 
     const [loginData, setLoginData] = useState({
-        username,
-        password
+        username: "",
+        password: ""
     });
 
     function handleChange(evt) {
@@ -44,7 +44,7 @@ function LoginForm() {
                         value={loginData.password}/>
             </div>
 
-            <button>Login</button>
+            <button type="submit">Login</button>
 
         </form>
     )

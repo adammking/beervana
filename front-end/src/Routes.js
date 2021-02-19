@@ -25,19 +25,19 @@ function Routes() {
       <Route path="/users" exact>
         <UserList />
       </Route>
-      <Route path="/users/:usename" exact>
+      <Route path="/users/:username" exact>
         <User />
       </Route>
-      <Route path="/users/:usename/posts" exact>
+      <Route path="/users/:username/posts" exact>
         <PostList />
       </Route>
-      <Route path="/users/:usename/posts/:id" exact>
+      <Route path="/users/:username/posts/:id" exact>
         <Post />
       </Route>
-      <Route path="/users/:usename/reviews" exact>
+      <Route path="/users/:username/reviews" exact>
         <ReviewList />
       </Route>
-      <Route path="/users/:usename/reviews/:id" exact>
+      <Route path="/users/:username/reviews/:id" exact>
         <Review />
       </Route>
       <Route path="/beers" exact>

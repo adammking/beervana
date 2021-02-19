@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Brewery() {
+function Brewery({data}) {
      const { id, 
              name, 
              descript,
@@ -14,7 +14,7 @@ function Brewery() {
 
 
     return (
-        <div>
+        <div id={id}>
             <h1>{name}</h1>
             <h4>{address1}</h4>
             <h4>{city}</h4>

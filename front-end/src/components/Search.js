@@ -17,8 +17,7 @@ function Search({ searchFor, view }) {
     if (view === "beers") {
       // these fields aren't req'd---pass "", not empty string
        data = {
-        name:  search.name,
-        
+        name:  search.name
       };
 
     } else {

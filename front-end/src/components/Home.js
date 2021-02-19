@@ -1,25 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getTokenFromApi } from "../actions/auth";
+import { getTokenFromApi, registerUserWithApi } from "../actions/auth";
 import LoginForm from "./LoginForm"
-import useLocalStorage from "./hooks/useLocalStorage"
+import RegisterForm from "./RegisterForm"
 
 function Home() {
+    const [loginView, setLoginView] = useState(true);
     const dispatch = useDispatch();
-    const token = useSelector(st => st.token)
-    function login(data) {
-        dispatch(getTokenFromApi(data));
+
+    
+    function loginApi(data) {
+        dispatch(getTokenFromApi(data))
     }
 
-    function setToken() {
-        
-    }
+    function registerApi(data) {
+        dispatch(registerUserWithApi(data))
+    };
 
+    function toggleLogin() {
+        setLoginView(!loginView);
+    }
+    
+    const loginFields = (<>
+        <LoginForm login={loginApi}/> 
+        <aside>New User? <button onClick={toggleLogin}>Click Here</button>to register</aside>
+        </>)
+
+
+    const registerFields = (<>
+        <RegisterForm register={registerApi}/>
+        <aside>Already Registered? <button onClick={toggleLogin}>Click Here</button>to sign in</aside>
+        </>)
 
     return (
         <div>
             <h1>Welcome to Beervana!</h1>
-            <LoginForm login={login}/>
+            {loginView ? loginFields : registerFields}
         </div>
     )
     
