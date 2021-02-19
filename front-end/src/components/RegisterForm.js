@@ -24,7 +24,7 @@ function RegisterForm(register) {
 
 
     return (
-        <form onsubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <div className="form-group">
                 <label htmlFor="newuserform-username">Username: </label>

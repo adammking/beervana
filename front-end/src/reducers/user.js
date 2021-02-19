@@ -37,10 +37,10 @@ export default function rootReducer(state = { user: {id: "",
     switch (action.type) {
 
         case REGISTER_USER:
-            return {...state, token: action.token};
+            return {...state, token: action.data.token};
 
         case GET_TOKEN:
-            return {...state, token: action.token};
+            return {...state, token: action.data.token};
 
         case GET_USER:
             return { ...state, user: action.data };

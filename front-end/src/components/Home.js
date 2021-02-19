@@ -8,10 +8,7 @@ function Home() {
     const [loginView, setLoginView] = useState(true);
     const dispatch = useDispatch();
 
-    
-    function loginApi(data) {
-        dispatch(getTokenFromApi(data))
-    }
+        
 
     function registerApi(data) {
         dispatch(registerUserWithApi(data))
@@ -22,7 +19,7 @@ function Home() {
     }
     
     const loginFields = (<>
-        <LoginForm login={loginApi}/> 
+        <LoginForm /> 
         <aside>New User? <button onClick={toggleLogin}>Click Here</button>to register</aside>
         </>)
 

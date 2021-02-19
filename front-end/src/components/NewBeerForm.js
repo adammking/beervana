@@ -25,7 +25,7 @@ function NewBeerForm() {
 
 
     return (
-        <form onsubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <div className="form-group">
                 <label htmlFor="newbeerform-name">Name: </label>

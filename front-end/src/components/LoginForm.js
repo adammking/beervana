@@ -1,12 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getTokenFromApi } from "../actions/auth";
 
 
-function LoginForm({login}) {
+
+function LoginForm() {
 
     const [loginData, setLoginData] = useState({
         username: "",
         password: ""
     });
+
+    const dispatch = useDispatch();
+
+    function loginApi(loginData) {
+            dispatch(getTokenFromApi(loginData))
+        }
 
     function handleChange(evt) {
         const {name, value} = evt.target;
@@ -18,12 +27,12 @@ function LoginForm({login}) {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        login(loginData);
+        loginApi(loginData);
     }
 
 
     return (
-        <form onsubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <div className="form-group">
                 <label htmlFor="loginform-username"> </label>

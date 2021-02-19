@@ -11,11 +11,12 @@ GET_TOKEN
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/auth"
 
 
-export function getTokenFromApi({data}){
+export function getTokenFromApi(data){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/token`, 
-                                      data,
+                                      data: {username: data.username, 
+                                             password: data.password},
                                     })
         return dispatch(getToken(response.data))
     }
@@ -32,7 +33,10 @@ export function registerUserWithApi(data){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/register`, 
-                                      data: data,
+                                      data: {username: data.username, 
+                                             password: data.password,
+                                             firstName: data.firstName,
+                                             lastName: data.lastName},
                                     })
         return dispatch(registerUser(response.data))
     }
