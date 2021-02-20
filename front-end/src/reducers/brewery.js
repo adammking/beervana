@@ -8,17 +8,29 @@ UPDATE_BEER_IN_BREWERY
 
 } from "../actions/types" 
 
-export default function rootReducer(state={}, action) {
+const INITIAL_STATE = { currentBrewery: { id: "", 
+                                        name: "", 
+                                        descript: "",
+                                        address1: "",
+                                        city: "",
+                                        state: "",
+                                        country: "", 
+                                        phone: "",
+                                        website: "", 
+                                        beers: [] }
+                        }
+
+export default function rootReducer(state= INITIAL_STATE, action) {
 
     switch (action.type) {
         case SEARCH_BREWERIES:
-            return {...state, [action.breweries]: action.breweries}
+            return {...state, breweries: [...action.data.breweries]}
 
         case GET_BREWERY:
-            return {...state, [action.brewery]: action.brewery};
+            return {...state, currentBrewery: action.data.brewery};
 
         case ADD_BREWERY:
-            return {...state, [action.brewery]: action.brewery}
+            return {...state, currentBrewery: action.brewery}
 
         case UPDATE_BREWERY:
             return {...state, [action.brewery]: action.brewery};

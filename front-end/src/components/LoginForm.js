@@ -1,21 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getTokenFromApi } from "../actions/auth";
+import React, { useEffect, useState } from "react";
 
 
-
-function LoginForm() {
+function LoginForm({login}) {
 
     const [loginData, setLoginData] = useState({
         username: "",
         password: ""
     });
-
-    const dispatch = useDispatch();
-
-    function loginApi(loginData) {
-            dispatch(getTokenFromApi(loginData))
-        }
 
     function handleChange(evt) {
         const {name, value} = evt.target;
@@ -25,9 +16,10 @@ function LoginForm() {
         }));
     }
 
+
     function handleSubmit(evt) {
         evt.preventDefault();
-        loginApi(loginData);
+        login(loginData);
     }
 
 

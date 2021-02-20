@@ -8,23 +8,18 @@ function BreweryList() {
 
     const dispatch = useDispatch();
     
-
     
     function search(search) {
         dispatch(searchBreweriesFromApi(search));
     }
     
 
-    const breweries = useSelector(st => st.breweries) ;
+    const breweries = useSelector(st => st.brewery.breweries) ;
+
 
     return (
         <div>
             <Search searchFor={search} view={"breweries"}/>
-            <ul>
-                {breweries.map(data => (
-                    <li><Brewery data={data}/></li>
-                ))}
-            </ul>
         </div>
     )
 }

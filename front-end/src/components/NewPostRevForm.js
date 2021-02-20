@@ -22,7 +22,7 @@ function NewPostRevForm() {
 
 
     return (
-        <form onsubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <div className="form-group">
                 <label htmlFor="newpostrevform-title">Title: </label>

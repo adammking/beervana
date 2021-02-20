@@ -11,11 +11,11 @@ GET_FOLLOWING,
 ADD_LIKE,
 GET_LIKE_COUNT,
 REMOVE_LIKE,
-GET_ALL_POSTS,
+GET_USER_POSTS,
 GET_POST,
 ADD_POST,
 DELETE_POST,
-GET_ALL_REVIEWS,
+GET_USER_REVIEWS,
 GET_REVIEW,
 ADD_REVIEW,
 DELETE_REVIEW,
@@ -237,7 +237,7 @@ function removeLike(data) {
 }
 
 
-export function getAllPostsFromApi(username){
+export function getUserPostsFromApi(username){
     return async function(dispatch) {
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts`, 
@@ -251,7 +251,7 @@ export function getAllPostsFromApi(username){
 
 function getAllPosts(data){
     return {
-        type: GET_ALL_POSTS,
+        type: GET_USER_POSTS,
         data
     }
 }
@@ -312,7 +312,7 @@ function deletePost(data){
     }
 }
 
-export function getAllReviewsFromApi(username){
+export function getUserReviewsFromApi(username){
     return async function(dispatch) {
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/reviews`, 
@@ -325,7 +325,7 @@ export function getAllReviewsFromApi(username){
 
 function getAllReviews(data){
     return {
-        type: GET_ALL_REVIEWS,
+        type: GET_USER_REVIEWS,
         data
     }
 }

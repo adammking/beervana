@@ -1,7 +1,7 @@
 import Review from "./Review";
 import React, { useEffect }from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllReviewsFromApi } from '../actions/user';
+import { getUserReviewsFromApi } from '../actions/user';
 
 
 function ReviewList() {
@@ -9,7 +9,7 @@ function ReviewList() {
     const dispatch = useDispatch();
 
     useEffect(function() {
-        dispatch(getAllReviewsFromApi())
+        dispatch(getUserReviewsFromApi())
     }, [dispatch])
 
 

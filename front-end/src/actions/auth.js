@@ -2,6 +2,7 @@
 import axios from "axios";
 
 
+
 import { 
 REGISTER_USER,
 GET_TOKEN
@@ -18,6 +19,7 @@ export function getTokenFromApi(data){
                                       data: {username: data.username, 
                                              password: data.password},
                                     })
+        localStorage.setItem("token", response.data.token)
         return dispatch(getToken(response.data))
     }
 }
@@ -38,6 +40,7 @@ export function registerUserWithApi(data){
                                              firstName: data.firstName,
                                              lastName: data.lastName},
                                     })
+        localStorage.setItem("token", response.data.token)
         return dispatch(registerUser(response.data))
     }
 }

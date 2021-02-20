@@ -19,13 +19,13 @@ export const GET_LIKE_COUNT = "GET_LIKE_COUNT"
 export const REMOVE_LIKE = "REMOVE_LIKE"
 
 /**User Post Actions */
-export const GET_ALL_POSTS = "GET_ALL_POSTS"
+export const GET_USER_POSTS = "GET_USER_POSTS"
 export const GET_POST = "GET_POST"
 export const ADD_POST = "ADD_POST"
 export const DELETE_POST = "DELETE_POST"
 
 /**User Review Actions */
-export const GET_ALL_REVIEWS = "GET_ALL_REVIEWS"
+export const GET_USER_REVIEWS = "GET_USER_REVIEWS"
 export const GET_REVIEW = "GET_REVIEW"
 export const ADD_REVIEW = "ADD_REVIEW"
 export const DELETE_REVIEW = "DELETE_REVIEW"

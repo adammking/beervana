@@ -2,14 +2,14 @@
 import React, { useEffect }from "react";
 import Post from "./Post"
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPostsFromApi } from '../actions/user';
+import { getUserPostsFromApi } from '../actions/user';
 
 function PostList() {
     
     const dispatch = useDispatch();
 
     useEffect(function() {
-        dispatch(getAllPostsFromApi())
+        dispatch(getUserPostsFromApi())
     }, [dispatch])
 
 

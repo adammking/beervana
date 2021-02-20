@@ -8,7 +8,6 @@ function Search({ searchFor, view }) {
   });
 
 
-
   function handleSubmit(evt) {
     evt.preventDefault();
     let data;

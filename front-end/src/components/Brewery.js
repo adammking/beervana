@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Brewery({data}) {
+function Brewery(data) {
      const { id, 
              name, 
              descript,

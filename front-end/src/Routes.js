@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-import Home from "./components/Home";
+import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
 import UserList from "./components/UserList"
 import User from "./components/User"
@@ -17,7 +17,7 @@ function Routes() {
   return (
     <Switch>
       <Route path="/login" exact>
-        <Home />
+        <Login />
       </Route>
       <Route path="/register" exact>
         <RegisterForm />
