@@ -3,14 +3,12 @@ import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import { useDispatch, useSelector } from "react-redux";
 import { getTokenFromApi } from "../actions/auth";
-import { getUserFromApi } from "../actions/user";
 import { useHistory } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 
 function Login() {
     const [loginView, setLoginView] = useState(true);
     const token = useSelector(st => st.auth.token) 
-    const username = decode(token)
     const auth = useSelector(st => st.auth.authenticated)
 
     const dispatch = useDispatch();
@@ -21,15 +19,17 @@ function Login() {
     }
 
     function loginApi(loginData) {
-        console.log(token, auth)
         dispatch(getTokenFromApi(loginData))
-        console.log(token)
+    }
+
+    useEffect(function() {
         if (token && auth) {
-            history.push(`users/:username`)
+            const { username } = decode(token)
+            history.push(`users/${username}`)
         } else {
             history.push("/login")
         }
-    }
+    }, [token, auth])
     
     
     

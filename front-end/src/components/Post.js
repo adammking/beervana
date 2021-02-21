@@ -1,12 +1,16 @@
 import React from 'react';
 
-function Post({data}) {
-    const { id, title, body } = data;
+function Post( {id, title, body, deletePost}) {
+
+    function handleDelete() {
+        deletePost(id);
+    }
 
     return (
-        <div id={id}>
-            <h1>{title}</h1>
+        <div>
+            <h3>{title}</h3>
             <p>{body}</p>
+            <button onClick={handleDelete}>Remove Post</button>
         </div>
     )
 }

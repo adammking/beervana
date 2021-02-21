@@ -7,20 +7,20 @@ REMOVE_LIKE,
 
 } from "../actions/types" 
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = { count: 0 }
 
 export default function rootReducer(state = INITIAL_STATE, action) {
 
     switch (action.type) {
 
     case ADD_LIKE:
-            return {...state, [action.data]: action.data};
+            return {...state, count: state.count + 1}
 
         case GET_LIKE_COUNT:
-            return {...state, [action.data]: action.data};
+            return {...state, count: action.data};
 
         case REMOVE_LIKE:
-            return{...state};
+            return {...state, count: state.count - 1}
 
         default:
             return state;

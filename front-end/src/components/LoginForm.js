@@ -27,7 +27,7 @@ function LoginForm({login}) {
         <form onSubmit={handleSubmit}>
 
             <div className="form-group">
-                <label htmlFor="loginform-username"> </label>
+                <label htmlFor="loginform-username">Username: </label>
                 <input onChange={handleChange}
                         id="loginform-username"
                         name="username"
@@ -37,7 +37,7 @@ function LoginForm({login}) {
             </div>
 
             <div className="form-group">
-                <label htmlFor="loginform-password"> </label>
+                <label htmlFor="loginform-password">Password: </label>
                 <input onChange={handleChange}
                         id="loginform-password"
                         name="password"

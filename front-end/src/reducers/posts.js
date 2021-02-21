@@ -8,23 +8,26 @@ DELETE_POST,
 
 } from "../actions/types" 
 
-const INITIAL_STATE = {}
+const INITIAL_STATE = {posts: [],
+                       currentPost: {id: "", 
+                                      title: "", 
+                                      body: ""}}
 
 export default function rootReducer(state = INITIAL_STATE, action) {
 
 switch (action.type) {
 
-case GET_USER_POSTS:
-            return {...state, posts: [...action.data]};
+    case GET_USER_POSTS:
+            return {...state, posts: action.data.posts};
 
         case GET_POST:
-            return {...state, post: action.data};
+            return {...state, currentPost: action.data.post};
 
         case ADD_POST:
-            return {...state, posts: [action.data]};
+            return {...state, posts: [...state.posts, {...action.data.post}]};
 
         case DELETE_POST:
-            return {...state, [action.data]: action.data};
+            return { ...state, posts: state.posts.filter(post => post.id !== action.data.id)}
 
         default:
             return state;

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-function NewPostRevForm() {
+function NewPostRevForm({add}) {
 
     const [postRevData, setPostRevData] = useState({
         title: "",
         body: ""
     });
+
+    
 
     function handleChange(evt) {
         const {name, value} = evt.target;
@@ -30,7 +32,7 @@ function NewPostRevForm() {
                         id="newpostrevform-title"
                         name="title"
                         className="form-control"
-                        value={postRevData.username}/>            
+                        value={postRevData.title}/>            
             
             </div>
 
@@ -40,7 +42,7 @@ function NewPostRevForm() {
                         id="newpostrevform-body"
                         name="body"
                         className="form-control"
-                        value={postRevData.password}/>
+                        value={postRevData.body}/>
             </div>
 
             <button>Submit</button>

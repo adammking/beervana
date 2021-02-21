@@ -1,31 +1,58 @@
 
-import React, { useEffect }from "react";
+import React, { useEffect, useState }from "react";
 import Post from "./Post"
-import { useDispatch, useSelector } from "react-redux";
-import { getUserPostsFromApi } from '../actions/user';
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { getUserPostsFromApi, addPostWithApi } from '../actions/posts';
+import { decode } from "jsonwebtoken"
+import NewPostRevForm from "./NewPostRevForm"
 
 function PostList() {
+
+    const [addView, setAddView] = useState(false);
+
     
     const dispatch = useDispatch();
+    const { id, username } = decode(localStorage.getItem("token"))
+    const posts = useSelector(st => st.posts.posts);
+
+    const addFields = (<>
+        <NewPostRevForm add={addPost}/> 
+        </>)
+
+    function toggleForm() {
+        setAddView(!addView);
+    }
+
+    function addPost(data) {
+        dispatch(addPostWithApi(username, data))
+    }
+
+    function deletePost(id, data) {
+        dispatch(addPostWithApi(username, id, data))
+    }
 
     useEffect(function() {
-        dispatch(getUserPostsFromApi())
-    }, [dispatch])
-
+        dispatch(getUserPostsFromApi(username))
+    }, [dispatch] )
 
     
-
-    const posts = useSelector(st => st.user.posts) ;
 
     return (
         <div>
+            <h3>Posts:</h3>
+            <button onClick={toggleForm}>{addView ? "Cancel" : "Add Post"}</button>
+            {addView ? addFields : <div></div>}
+
+            {posts.length > 0 ? 
             <ul>
                 {posts.map(data => (
-                    <li><Post data={data}/></li>
+                    <li key={data.id}><Post deletePost={() => deletePost(data.id)} title={data.title} body={data.body}/></li>
                 ))}
             </ul>
+            : <h5>No Posts</h5>}
         </div>
     )
 }
+
 
 export default PostList;

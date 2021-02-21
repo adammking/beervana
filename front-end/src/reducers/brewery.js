@@ -17,29 +17,42 @@ const INITIAL_STATE = { currentBrewery: { id: "",
                                         country: "", 
                                         phone: "",
                                         website: "", 
-                                        beers: [] }
+                                        beers: [] }, 
+                        breweries: []
                         }
 
 export default function rootReducer(state= INITIAL_STATE, action) {
 
     switch (action.type) {
         case SEARCH_BREWERIES:
-            return {...state, breweries: [...action.data.breweries]}
+            return {...state, 
+                    breweries: [...state.breweries, action.data.breweries]
+                    }
 
         case GET_BREWERY:
-            return {...state, currentBrewery: action.data.brewery};
+            return {...state, 
+                    currentBrewery: action.data.brewery
+                    };
 
         case ADD_BREWERY:
-            return {...state, currentBrewery: action.brewery}
+            return {...state, 
+                    currentBrewery: action.data.brewery
+                    }
 
         case UPDATE_BREWERY:
-            return {...state, [action.brewery]: action.brewery};
+            return {...state, 
+                    currentBrewery: {...state.currentBrewery, ...action.data }
+                    };
 
         case ADD_BEER_TO_BREWERY:
-            return {...state, [action.brewery]: action.brewery, ...action.brewery.beers, [action.brewery.beer]: action.brewery.beer}
+            return {...state, 
+                    currentBrewery: {...state.currentBrewery, 
+                        beers: [...state.currentBrewery.beers, {...action.data.beer}]}}
 
         case UPDATE_BEER_IN_BREWERY:
-            return {...state, [action.brewery]: action.brewery, ...action.brewery.beers, [action.brewery.beer]: action.brewery.beer};
+            return {...state, 
+                    currentBrewery: {...state.currentBrewery, 
+                        beers: [...state.currentBrewery.beers, {...action.data.beer}]}}
         
         default:
             return state;

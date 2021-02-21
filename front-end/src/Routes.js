@@ -16,40 +16,40 @@ import Brewery from "./components/Brewery"
 function Routes() {
   return (
     <Switch>
-      <Route path="/login" exact>
+      <Route exact path="/login">
         <Login />
       </Route>
-      <Route path="/register" exact>
+      <Route exact path="/register">
         <RegisterForm />
       </Route>
-      <Route path="/users" exact>
+      <Route exact path="/users">
         <UserList />
       </Route>
-      <Route path="/users/:username" exact>
+      <Route exact path="/users/:username">
         <User />
       </Route>
-      <Route path="/users/:username/posts" exact>
+      <Route exact path="/users/:username/posts">
         <PostList />
       </Route>
-      <Route path="/users/:username/posts/:id" exact>
+      <Route exact path="/users/:username/posts/:id">
         <Post />
       </Route>
-      <Route path="/users/:username/reviews" exact>
+      <Route exact path="/users/:username/reviews">
         <ReviewList />
       </Route>
-      <Route path="/users/:username/reviews/:id" exact>
+      <Route exact path="/users/:username/reviews/:id">
         <Review />
       </Route>
-      <Route path="/beers" exact>
+      <Route exact path="/beers">
         <BeerList />
       </Route>
-      <Route path="/beers/:id" exact>
+      <Route exact path="/beers/:id">
         <Beer />
       </Route>
-      <Route path="/breweries" exact>
+      <Route exact path="/breweries">
         <BreweryList />
       </Route>
-      <Route path="/breweries/:id" exact>
+      <Route exact path="/breweries/:id">
         <Brewery />
       </Route>
       <Redirect to="/login" />
