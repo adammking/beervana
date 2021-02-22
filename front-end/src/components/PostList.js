@@ -2,7 +2,7 @@
 import React, { useEffect, useState }from "react";
 import Post from "./Post"
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { getUserPostsFromApi, addPostWithApi } from '../actions/posts';
+import { getUserPostsFromApi, addPostWithApi, deletePostsFromApi } from '../actions/posts';
 import { decode } from "jsonwebtoken"
 import NewPostRevForm from "./NewPostRevForm"
 
@@ -12,7 +12,7 @@ function PostList() {
 
     
     const dispatch = useDispatch();
-    const { id, username } = decode(localStorage.getItem("token"))
+    const { username } = decode(localStorage.getItem("token"))
     const posts = useSelector(st => st.posts.posts);
 
     const addFields = (<>
@@ -27,13 +27,13 @@ function PostList() {
         dispatch(addPostWithApi(username, data))
     }
 
-    function deletePost(id, data) {
-        dispatch(addPostWithApi(username, id, data))
+    function deletePost(id) {
+        dispatch(deletePostsFromApi(username, id))
     }
 
     useEffect(function() {
         dispatch(getUserPostsFromApi(username))
-    }, [dispatch] )
+    }, [dispatch, posts.length])
 
     
 

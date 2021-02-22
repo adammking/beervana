@@ -23,11 +23,12 @@ switch (action.type) {
             return {...state, currentReview: action.data.review};
 
         case ADD_REVIEW:
-            return {...state, reviews: [...state.review, action.data.review]};
+            return {...state, reviews: [...state.reviews, action.data.review]};
 
         case DELETE_REVIEW:
-            return { ...state, reviews: state.review.filter(post => post.id !== action.data.id)}
-
+            const reviews = {...state.reviews}
+            delete reviews[action.data.id]
+            return { ...state, reviews}
         default:
             return state;
     }

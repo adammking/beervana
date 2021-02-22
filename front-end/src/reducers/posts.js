@@ -27,7 +27,9 @@ switch (action.type) {
             return {...state, posts: [...state.posts, {...action.data.post}]};
 
         case DELETE_POST:
-            return { ...state, posts: state.posts.filter(post => post.id !== action.data.id)}
+            const posts = {...state.posts}
+            delete posts[action.data.id]
+            return { ...state, posts}
 
         default:
             return state;

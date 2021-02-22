@@ -1,17 +1,18 @@
 import React from 'react';
 
-function Review({data}) {
+function Review( {id, title, body, deleteReview}) {
 
-    const { title, body } = data;
+    function handleDelete() {
+        deleteReview(id);
+    }
 
     return (
         <div>
-            <h1>{title}</h1>
+            <h3>{title}</h3>
             <p>{body}</p>
+            <button onClick={handleDelete}>Remove Review</button>
         </div>
     )
 }
-
-
 
 export default Review;

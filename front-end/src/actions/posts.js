@@ -68,11 +68,11 @@ function addPost(data){
     }
 }
 
-export function deletePostsFromApi(username, postId, data){
+export function deletePostsFromApi(username, postId){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
-                                      url: `${API_URL}/${username}/posts/${postId}/likes`, 
-                                      data: data,
+                                      url: `${API_URL}/${username}/posts/${postId}`, 
+                                      data: {id: postId},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
@@ -81,6 +81,7 @@ export function deletePostsFromApi(username, postId, data){
 }
 
 function deletePost(data){
+    console.log(data)
     return {
         type: DELETE_POST,
         data
