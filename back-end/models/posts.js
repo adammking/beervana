@@ -55,7 +55,7 @@ class Posts {
             `DELETE 
              FROM posts
              WHERE id = $1
-             RETURNING title`,
+             RETURNING id`,
              [post_id]
         );
 

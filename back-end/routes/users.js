@@ -5,7 +5,7 @@
 const jsonschema = require("jsonschema");
 
 const express = require("express");
-const { ensureCorrectUser } = require("../middleware/auth");
+const { ensureCorrectUser, ensureLoggedIn } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
 const Users = require("../models/users");
 const userUpdateSchema = require("../schemas/userUpdate");
@@ -17,6 +17,15 @@ const Follows = require("../models/follows");
 const Likes = require("../models/likes");
 
 const router = new express.Router();
+
+router.get("/", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const users = await Users.findAll();
+        return res.json({ users });
+    } catch (err) {
+        return next(err);
+    }
+});
 
 /** GET /[username] => { user }
  *
@@ -175,7 +184,7 @@ router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, n
 router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
     try {
         await Posts.deletePost(req.params.id);
-        return res.json({ deleted: +req.params.id })
+        return res.json( {id: req.params.id})
     } catch (err) {
         return next(err);
     }

@@ -17,8 +17,10 @@ const { BadRequestError } = require("../expressError");
         static async getFollowers(userId) {
 
             let followersRes = await db.query(
-                `SELECT users_following_id
+                `SELECT users_following_id, username
                  FROM follows
+                 JOIN users 
+                 ON follows.users_following_id = users.id
                  WHERE users_being_followed_id = $1`,
                  [userId]
             )
