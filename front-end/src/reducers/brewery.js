@@ -26,7 +26,7 @@ export default function rootReducer(state= INITIAL_STATE, action) {
     switch (action.type) {
         case SEARCH_BREWERIES:
             return {...state, 
-                    breweries: [...state.breweries, action.data.breweries]
+                    breweries:  action.data.breweries
                     }
 
         case GET_BREWERY:

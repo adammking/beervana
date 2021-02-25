@@ -18,7 +18,7 @@ export default function rootReducer(state = INITIAL_STATE, action) {
             return { ...state, currentUser: action.data.user};
 
         case FIND_ALL_USERS:
-            return { ...state, userList: action.data.users };
+            return { ...state, users: action.data.users };
 
         case UPDATE_USER:
             return {...state, currentUser: {...state.currentUser, ...action.data}};

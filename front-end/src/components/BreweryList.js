@@ -19,7 +19,15 @@ function BreweryList() {
 
     return (
         <div>
+            <div>
             <Search searchFor={search} view={"breweries"}/>
+            {breweries ? 
+            <ul>
+                {breweries.map(data => (
+                    <li key={data.id}><Brewery data={data}/></li>
+                ))}
+            </ul> : <h2>Search Breweries</h2>}
+        </div>
         </div>
     )
 }

@@ -1,11 +1,16 @@
+import { JsonWebTokenError } from "jsonwebtoken";
 import React from "react";
 import { Link } from "react-router-dom";
+import { decode } from "jsonwebtoken";
 
 function Navbar() {
+
+  const { username } = decode(localStorage.getItem("token"))
+  
     
   return (
     <nav className="navbar navbar-light bg-info">
-      <Link to="/login" className="navbar-brand text-light">
+      <Link to="/users" className="navbar-brand text-light">
         Home
       </Link>
       <ul className="navbar-nav flex-row">
@@ -18,6 +23,10 @@ function Navbar() {
           <Link to="/breweries" className="nav-link text-light">
             Breweries
           </Link>
+        </li>
+        <li className="nav-item">
+          {username ? <Link to={`/users/${username}`} className="nav-link text-light">Profile </Link> : <Link to="/login" className="nav-link text-light">Login </Link>}
+          
         </li>
       </ul>
     </nav>

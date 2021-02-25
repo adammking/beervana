@@ -49,11 +49,11 @@ function getFollowing(data) {
     }
 }
 
-export function addFollowWithApi(username, data){
+export function addFollowWithApi(username, id){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/follow`, 
-                                      data: data,
+                                      data: {id: id},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
@@ -68,11 +68,11 @@ function addFollow(data) {
     }
 }
 
-export function deleteFollowFromApi(username, data){
+export function deleteFollowFromApi(username, id){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/follow`, 
-                                      data: data,
+                                      data: {id: id},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})

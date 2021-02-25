@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import React from 'react';
 import { useParams } from "react-router-dom"
 import { decode } from "jsonwebtoken"
 import ReviewList from './ReviewList';
@@ -9,8 +8,7 @@ import FollowingList from './FollowingList';
 
 
 
-function User() {
-    const dispatch = useDispatch();
+function UserHome() {
     const { username } = useParams();
     const { id } = decode(localStorage.getItem("token"))
    
@@ -27,4 +25,4 @@ function User() {
     )
 };
 
-export default User;
+export default UserHome;

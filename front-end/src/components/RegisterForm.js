@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { registerUserWithApi } from "../actions/auth";
 
-function RegisterForm() {
-    const dispatch = useDispatch();
+function RegisterForm({register}) {
 
     const [userData, setUserData] = useState({
         username: "",
@@ -12,9 +9,7 @@ function RegisterForm() {
         lastName: ""
     });
 
-    function registerApi(loginData) {
-        dispatch(registerUserWithApi(loginData))
-    }
+    
 
     function handleChange(evt) {
         const {name, value} = evt.target;
@@ -26,7 +21,7 @@ function RegisterForm() {
 
     function handleSubmit(evt) {
         evt.preventDefault();
-        registerApi(userData);
+        register(userData);
     }
 
 

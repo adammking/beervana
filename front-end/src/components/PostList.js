@@ -46,7 +46,7 @@ function PostList() {
             {posts.length > 0 ? 
             <ul>
                 {posts.map(data => (
-                    <li key={data.id}><Post deletePost={() => deletePost(data.id)} title={data.title} body={data.body}/></li>
+                    <li key={data.id}><Post deletePost={() => deletePost(data.id)} title={data.title} body={data.body} postId={data.id}/></li>
                 ))}
             </ul>
             : <h5>No Posts</h5>}

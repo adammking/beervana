@@ -7,6 +7,7 @@ import Search from "./Search"
 function BeerList() {
 
     const dispatch = useDispatch();
+    const beers = useSelector(st => st.beers.beers) ;
 
     
 
@@ -15,16 +16,16 @@ function BeerList() {
     }
     
 
-    const beers = useSelector(st => st.beers) ;
 
     return (
         <div>
-            <Search searchFor={search} view={beers}/>
+            <Search searchFor={search} view={"beers"}/>
+            {beers ? 
             <ul>
                 {beers.map(data => (
-                    <li><Beer data={data}/></li>
+                    <li key={data.id}><Beer data={data}/></li>
                 ))}
-            </ul>
+            </ul> : <h2>Search Beers</h2>}
         </div>
     )
 }

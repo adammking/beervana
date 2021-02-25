@@ -23,17 +23,18 @@ export function getLikesFromApi(username, postId){
 }
 
 function getLikeCount(data) {
+        console.log(data)
     return {
         type: GET_LIKE_COUNT,
         data 
     }
 }
 
-export function addLikesWithApi(username, postId, data){
+export function addLikesWithApi(username, postId){
     return async function(dispatch) {
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
-                                      data: data,
+                                      data: {},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
@@ -42,6 +43,7 @@ export function addLikesWithApi(username, postId, data){
 }
 
 function addLike(data) {
+        console.log(data)
     return {
         type: ADD_LIKE,
         data 
@@ -49,11 +51,11 @@ function addLike(data) {
 }
 
 
-export function deleteLikesFromApi(username, postId, data){
+export function deleteLikesFromApi(username, postId){
     return async function(dispatch) {
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
-                                      data: data,
+                                      data: {},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
@@ -63,6 +65,7 @@ export function deleteLikesFromApi(username, postId, data){
 
 
 function removeLike(data) {
+    console.log(data)
     return {
         type: REMOVE_LIKE,
         data 

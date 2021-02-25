@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import LoginForm from "./LoginForm"
 import RegisterForm from "./RegisterForm"
 import { useDispatch, useSelector } from "react-redux";
-import { getTokenFromApi } from "../actions/auth";
+import { getTokenFromApi, registerUserWithApi } from "../actions/auth";
 import { useHistory } from "react-router-dom";
 import { decode } from "jsonwebtoken";
 
@@ -20,6 +20,10 @@ function Login() {
 
     function loginApi(loginData) {
         dispatch(getTokenFromApi(loginData))
+    }
+
+    function registerApi(loginData) {
+        dispatch(registerUserWithApi(loginData))
     }
 
     useEffect(function() {
@@ -40,7 +44,7 @@ function Login() {
 
 
     const registerFields = (<>
-        <RegisterForm />
+        <RegisterForm register={registerApi}/>
         <aside>Already Registered? <button onClick={toggleLogin}>Click Here</button>to sign in</aside>
         </>)
 

@@ -3,7 +3,7 @@ import { Switch, Redirect, Route } from "react-router-dom";
 import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
 import UserList from "./components/UserList"
-import User from "./components/User"
+import UserHome from "./components/UserHome"
 import PostList from "./components/PostList"
 import Post from "./components/Post"
 import ReviewList from "./components/ReviewList"
@@ -26,7 +26,7 @@ function Routes() {
         <UserList />
       </Route>
       <Route exact path="/users/:username">
-        <User />
+        <UserHome />
       </Route>
       <Route exact path="/users/:username/posts">
         <PostList />

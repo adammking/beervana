@@ -81,7 +81,6 @@ export function deletePostsFromApi(username, postId){
 }
 
 function deletePost(data){
-    console.log(data)
     return {
         type: DELETE_POST,
         data

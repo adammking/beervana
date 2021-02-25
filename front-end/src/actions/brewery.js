@@ -41,6 +41,7 @@ export function searchBreweriesFromApi(data){
                                       headers: {
                                           Authorization: `Bearer ${token}` 
                                       }})
+                                      
         return dispatch(searchBreweries(response.data))
     }
 }

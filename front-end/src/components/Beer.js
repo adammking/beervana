@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Beer({data}) {
-    const { id, name, brewery, ibu, abv, descript } = data
+    const { id, name, brewery, ibu, abv, description } = data
 
 
     return (
@@ -10,7 +10,7 @@ function Beer({data}) {
             <aside>{brewery}</aside>
             <h4>{ibu}</h4>
             <h4>{abv}</h4>
-            <p>{descript}</p>
+            <p>{description}</p>
         </div>
     )
 }

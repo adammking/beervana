@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Brewery(data) {
+function Brewery({data}) {
      const { id, 
              name, 
-             descript,
+             description,
              address1,
              city,
              state,
@@ -22,7 +22,7 @@ function Brewery(data) {
             <h4>{country}</h4>
             <h4>{phone}</h4>
             <h4>{website}</h4>
-            <p>{descript}</p>
+            <p>{description}</p>
         </div>
     )
 }
