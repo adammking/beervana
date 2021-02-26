@@ -15,7 +15,7 @@ export const GET_FOLLOWING = "GET_FOLLOWING"
 
 /**User Like Actions */
 export const ADD_LIKE = "ADD_LIKE"
-export const GET_LIKE_COUNT = "GET_LIKE_COUNT"
+export const GET_LIKES = "GET_LIKE_COUNT"
 export const REMOVE_LIKE = "REMOVE_LIKE"
 
 /**User Post Actions */

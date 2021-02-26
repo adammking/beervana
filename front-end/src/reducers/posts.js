@@ -6,6 +6,7 @@ ADD_POST,
 DELETE_POST,
 
 
+
 } from "../actions/types" 
 
 const INITIAL_STATE = {posts: [],
@@ -30,6 +31,8 @@ switch (action.type) {
             const posts = {...state.posts}
             delete posts[action.data.id]
             return { ...state, posts}
+
+        
 
         default:
             return state;

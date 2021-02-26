@@ -1,44 +1,20 @@
-import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom"
-import { addLikesWithApi, getLikesFromApi, deleteLikesFromApi } from '../actions/likes';
-import {decode} from "jsonwebtoken"
-
-function Post( {postId, title, body, deletePost}) {
-    const dispatch = useDispatch()
-    const likeCount = useSelector(st => st.likes.count)
-    const likeInfo = useSelector(st => st.likes.likes)
-    const {username, id } = decode(localStorage.getItem("token"))
-    const likeIds = new Set()
-    likeInfo.forEach(data => likeIds.add(data.users_id))
-    console.log(likeInfo)
+import React from 'react';
 
 
-
-
-    function handleDelete() {
+function Post( {postId, title, body, deletePost, likes, like, unlike}) {
+    
+   
+    function handleDelete(postId) {
         deletePost(postId);
     }
 
-    useEffect(function() {
-        dispatch(getLikesFromApi(username, postId))
-    }, [dispatch, likeIds.size])
-
-
-    function like() {
-        dispatch(addLikesWithApi(username, postId))
-        dispatch(getLikesFromApi(username, postId))
-
+    function likePost(postId){
+        like(postId)
     }
 
-    function unlike() {
-        dispatch(deleteLikesFromApi(username, postId))
-        dispatch(getLikesFromApi(username, postId))
-
-
+    function unlikePost(postId){
+        unlike(postId)
     }
-
-
 
     return (
         <div>
@@ -46,8 +22,7 @@ function Post( {postId, title, body, deletePost}) {
             <p>{body}</p>
             <div>
             <button onClick={() => handleDelete(postId)}>Delete Post</button>
-            {likeIds.has(id) ? <button onClick={unlike}>Unlike</button> : <button onClick={like}>Like</button>}
-            {likeCount > 0 ? <aside>{likeCount}</aside> : <></>}
+            {likes.has(postId) ? <button onClick={() => unlikePost(postId)}>Unlike</button> : <button onClick={() => likePost(postId)}>Like</button>}
             </div>
         </div>
     )

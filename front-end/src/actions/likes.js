@@ -2,7 +2,7 @@ import axios from "axios";
 import {
 
 ADD_LIKE,
-GET_LIKE_COUNT,
+GET_LIKES,
 REMOVE_LIKE
 
 
@@ -18,14 +18,13 @@ export function getLikesFromApi(username, postId){
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
-        return dispatch(getLikeCount(response.data))
+        return dispatch(getLikes(response.data))
     }
 }
 
-function getLikeCount(data) {
-        console.log(data)
+function getLikes(data) {
     return {
-        type: GET_LIKE_COUNT,
+        type: GET_LIKES,
         data 
     }
 }
