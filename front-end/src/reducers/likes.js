@@ -18,7 +18,7 @@ export default function rootReducer(state = INITIAL_STATE, action) {
 
         case GET_LIKES:
 
-            return {...state, likes: [...state.likes, action.data.likes]};
+            return {...state, likes: action.data.likes};
 
         case REMOVE_LIKE:
             return {...state, likes: state.likes.filter(data => data.id !== action.data.likes.id)}

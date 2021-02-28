@@ -42,7 +42,6 @@ export function addLikesWithApi(username, postId){
 }
 
 function addLike(data) {
-        console.log(data)
     return {
         type: ADD_LIKE,
         data 
@@ -64,7 +63,6 @@ export function deleteLikesFromApi(username, postId){
 
 
 function removeLike(data) {
-    console.log(data)
     return {
         type: REMOVE_LIKE,
         data 

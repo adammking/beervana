@@ -17,11 +17,23 @@ function PostList() {
     const posts = useSelector(st => st.posts.posts);
     const likes = useSelector(st => st.likes.likes)
     const likeSet = new Set()
-    likes.forEach(post => likeSet.add(post.posts_id))
+
+    console.log(likes)
 
     const addFields = (<>
         <NewPostRevForm add={addPost}/> 
         </>)
+
+    function checkLikes(arr, set) {
+        if (arr.length > 0 && arr[0] !== undefined) {
+            arr.forEach(post => set.add(post.posts_id))
+            return set
+        } else {
+            return set
+        }
+    }
+
+    const newLikeSet = checkLikes(likes, likeSet)
 
     function toggleForm() {
         setAddView(!addView);
@@ -41,8 +53,8 @@ function PostList() {
 
 
     useEffect(function() {
-        dispatch(getLikesFromApi((username, postId))
-    }, [dispatch, likes.length])
+        dispatch(getLikesFromApi(username, id))
+    }, [dispatch])
 
 
 
@@ -72,9 +84,9 @@ function PostList() {
                                             title={data.title} 
                                             body={data.body} 
                                             postId={data.id} 
-                                            likes={likeSet}
-                                            like={like}
-                                            unlike={unlike}/></li>
+                                            likes={newLikeSet}
+                                            like={() => like(data.id)}
+                                            unlike={() => unlike(data.id)}/></li>
                 ))}
             </ul>
             : <h5>No Posts</h5>}
