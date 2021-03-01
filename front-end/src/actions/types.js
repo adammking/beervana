@@ -3,6 +3,7 @@
 export const GET_USER = "GET_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const GET_TOKEN = "GET_TOKEN";
+export const LOG_OUT = "LOG_OUT";
 export const FIND_ALL_USERS = "FIND_ALL_USERS"
 export const UPDATE_USER = "UPDATE_USER"
 export const REMOVE_USER = "REMOVE_USER"

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute"
 import Login from "./components/Login";
 import RegisterForm from "./components/RegisterForm";
 import UserList from "./components/UserList"
@@ -22,36 +23,36 @@ function Routes() {
       <Route exact path="/register">
         <RegisterForm />
       </Route>
-      <Route exact path="/users">
+      <PrivateRoute exact path="/users">
         <UserList />
-      </Route>
-      <Route exact path="/users/:username">
+      </PrivateRoute>
+      <PrivateRoute exact path="/users/:username">
         <UserHome />
-      </Route>
-      <Route exact path="/users/:username/posts">
+      </PrivateRoute>
+      <PrivateRoute exact path="/users/:username/posts">
         <PostList />
-      </Route>
-      <Route exact path="/users/:username/posts/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/users/:username/posts/:id">
         <Post />
-      </Route>
-      <Route exact path="/users/:username/reviews">
+      </PrivateRoute>
+      <PrivateRoute exact path="/users/:username/reviews">
         <ReviewList />
-      </Route>
-      <Route exact path="/users/:username/reviews/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/users/:username/reviews/:id">
         <Review />
-      </Route>
-      <Route exact path="/beers">
+      </PrivateRoute>
+      <PrivateRoute exact path="/beers">
         <BeerList />
-      </Route>
-      <Route exact path="/beers/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/beers/:id">
         <Beer />
-      </Route>
-      <Route exact path="/breweries">
+      </PrivateRoute>
+      <PrivateRoute exact path="/breweries">
         <BreweryList />
-      </Route>
-      <Route exact path="/breweries/:id">
+      </PrivateRoute>
+      <PrivateRoute exact path="/breweries/:id">
         <Brewery />
-      </Route>
+      </PrivateRoute>
       <Redirect to="/login" />
     </Switch>
   );

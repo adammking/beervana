@@ -22,9 +22,9 @@ function BreweryList() {
             <div>
             <Search searchFor={search} view={"breweries"}/>
             {breweries ? 
-            <ul>
+            <ul className="list-group">
                 {breweries.map(data => (
-                    <li key={data.id}><Brewery data={data}/></li>
+                    <li className="list-group-item" key={data.id}><Brewery data={data}/></li>
                 ))}
             </ul> : <h2>Search Breweries</h2>}
         </div>

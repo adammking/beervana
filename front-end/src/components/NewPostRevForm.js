@@ -45,7 +45,7 @@ function NewPostRevForm({add}) {
                         value={postRevData.body}/>
             </div>
 
-            <button>Submit</button>
+            <button className="btn btn-primary">Submit</button>
 
         </form>
     )

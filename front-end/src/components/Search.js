@@ -36,53 +36,92 @@ function Search({ searchFor, view }) {
   }
 
   const beerSearchFields = (
-    <div className="Search mb-4">
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <input
-          className="form-control form-control-lg flex-grow-1"
-          name="name"
-          placeholder="Beer Name"
-          value={search.name}
-          onChange={handleChange}
-        />
-        <button type="submit" className="btn btn-lg btn-primary">
-          Submit
+  <div className="container">
+  <form onSubmit={handleSubmit}> 
+
+  <div className="mb-3">
+    <input id="searchform-name" 
+           onChange={handleChange} 
+           aria-describedby="name" 
+           name="name" 
+           className="form-control" 
+           value={search.name} 
+           placeholder="Beer name"/>
+  </div>
+        <button type="submit" className="btn btn-primary">
+          Search
         </button>
       </form>
-    </div>
+</div>
   )
 
   const brewerySearchFields = (
-    <div className="Search mb-4">
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <input
-          className="form-control form-control-lg flex-grow-1"
-          name="name"
-          placeholder="Brewery name"
-          value={search.name}
-          onChange={handleChange}
-        />
+    // <div className="Search mb-4">
+    //   <form className="form-inline" onSubmit={handleSubmit}>
+    //     <input
+    //       className="form-control form-control-lg flex-grow-1"
+    //       name="name"
+    //       placeholder="Brewery name"
+    //       value={search.name}
+    //       onChange={handleChange}
+    //     />
 
-        <input
-          className="form-control form-control-lg flex-grow-1"
-          name="state"
-          placeholder="State"
-          value={search.state}
-          onChange={handleChange}
-        />
+    //     <input
+    //       className="form-control form-control-lg flex-grow-1"
+    //       name="state"
+    //       placeholder="State"
+    //       value={search.state}
+    //       onChange={handleChange}
+    //     />
 
-        <input
-          className="form-control form-control-lg flex-grow-1"
-          name="country"
-          placeholder="Country"
-          value={search.country}
-          onChange={handleChange}
-        />
-        <button type="submit" className="btn btn-lg btn-primary">
-          Submit
-        </button>
-      </form>
-    </div>
+    //     <input
+    //       className="form-control form-control-lg flex-grow-1"
+    //       name="country"
+    //       placeholder="Country"
+    //       value={search.country}
+    //       onChange={handleChange}
+    //     />
+    //     <button type="submit" className="btn btn-lg btn-primary">
+    //       Submit
+    //     </button>
+    //   </form>
+    // </div>
+<div className="container">
+  <form onSubmit={handleSubmit}> 
+
+  <div className="mb-3">
+    <input id="searchform-name" 
+           onChange={handleChange} 
+           aria-describedby="name" 
+           name="name" 
+           className="form-control" 
+           value={search.name} 
+           placeholder="Brewery name"/>
+  </div>
+
+  <div className="mb-3">
+    <input id="searchform-state" 
+           onChange={handleChange} 
+           aria-describedby="state" 
+           name="state"
+           className="form-control" 
+           value={search.state} 
+           placeholder="State"/>
+  </div>
+
+   <div className="mb-3">
+    <input id="searchform-country" 
+           onChange={handleChange} 
+           aria-describedby="country" 
+           name="country" 
+           className="form-control" 
+           value={search.country} 
+           placeholder="Country"/>
+  </div>
+  
+  <button type="submit" className="btn btn-primary">Search</button>
+</form>
+</div>
   )
 
   

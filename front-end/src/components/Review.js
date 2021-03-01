@@ -10,7 +10,7 @@ function Review( {id, title, body, deleteReview}) {
         <div>
             <h3>{title}</h3>
             <p>{body}</p>
-            <button onClick={handleDelete}>Remove Review</button>
+            <button className="btn btn-primary btn-sm m-2" onClick={handleDelete}>Remove Review</button>
         </div>
     )
 }

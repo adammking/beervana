@@ -36,10 +36,10 @@ function UserList() {
         <div>
             <h3>Users:</h3>
             {users.length > 0 ? 
-            <ul>
+            <ul className="list-group">
                 {users.map(data => (
-                    <li key={data.id}>{data.username}
-                    {followingIds.has(data.id) ? <button onClick={() => unFollow(data.id)}>Unfollow</button> : <button onClick={() => addFollow(data.id)}>Follow</button>}
+                    <li className="list-group-item m-2"key={data.id}><h3>{data.username}</h3>
+                    {followingIds.has(data.id) ? <button className="btn btn-primary btn-sm m-2" onClick={() => unFollow(data.id)}>Unfollow</button> : <button className="btn btn-primary btn-sm" onClick={() => addFollow(data.id)}>Follow</button>}
                     </li>
                 ))}
             </ul>

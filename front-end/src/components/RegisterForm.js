@@ -26,48 +26,32 @@ function RegisterForm({register}) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
 
-            <div className="form-group">
-                <label htmlFor="newuserform-username">Username: </label>
-                <input onChange={handleChange}
-                        id="newuserform-username"
-                        name="username"
-                        className="form-control"
-                        value={userData.username}/>            
-            
-            </div>
 
-            <div className="form-group">
-                <label htmlFor="newuserform-password">Password: </label>
-                <input onChange={handleChange}
-                        id="newuserform-password"
-                        name="password"
-                        className="form-control"
-                        value={userData.password}/>
-            </div>
+ <form onSubmit={handleSubmit}> 
 
-             <div className="form-group">
-                <label htmlFor="newuserform-first">First Name: </label>
-                <input onChange={handleChange}
-                        id="newuserform-first"
-                        name="firstName"
-                        className="form-control"
-                        value={userData.firstName}/>
-            </div>
+  <div className="mb-3">
+    <label htmlFor="newuserform-username" className="form-label">Username</label>
+    <input id="loginform-username" onChange={handleChange} aria-describedby="usernames" name="username" className="form-control" value={userData.username}/>
+  </div>
 
-             <div className="form-group">
-                <label htmlFor="newuserform-last">Last Name: </label>
-                <input onChange={handleChange}
-                        id="newuserform-last"
-                        name="lastName"
-                        className="form-control"
-                        value={userData.lastName}/>
-            </div>
+  <div className="mb-3">
+    <label htmlFor="newuserform-password" className="form-label">Password</label>
+    <input type="password" className="form-control" onChange={handleChange} id="newuserform-password" name="password" value={userData.password}/>
+  </div>
 
-            <button type="submit">Regiser</button>
+    <div className="mb-3">
+     <label htmlFor="newuserform-first" className="form-label">First Name:</label>
+     <input className="form-control" onChange={handleChange} id="newuserform-first" name="firstName" value={userData.firstName}/>
+   </div>
 
-        </form>
+<div className="mb-3">
+    <label htmlFor="newuserform-last" className="form-label">Last Name:</label>
+    <input className="form-control" onChange={handleChange} id="newuserform-last" name="lastName" value={userData.lastName}/>
+  </div>
+
+  <button type="submit" className="btn btn-primary">Register</button>
+</form>
     )
     
 }

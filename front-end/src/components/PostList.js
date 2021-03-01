@@ -1,11 +1,12 @@
 
 import React, { useEffect, useState }from "react";
 import Post from "./Post"
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserPostsFromApi, addPostWithApi, deletePostsFromApi } from '../actions/posts';
 import { addLikesWithApi, getLikesFromApi, deleteLikesFromApi } from '../actions/likes';
 import { decode } from "jsonwebtoken"
 import NewPostRevForm from "./NewPostRevForm"
+import './PostList.css'
 
 function PostList() {
 
@@ -17,9 +18,7 @@ function PostList() {
     const posts = useSelector(st => st.posts.posts);
     const likes = useSelector(st => st.likes.likes)
     const likeSet = new Set()
-
-    console.log(likes)
-
+    
     const addFields = (<>
         <NewPostRevForm add={addPost}/> 
         </>)
@@ -74,13 +73,13 @@ function PostList() {
     return (
         <div>
             <h3>Posts:</h3>
-            <button onClick={toggleForm}>{addView ? "Cancel" : "Add Post"}</button>
+            <button className="btn btn-primary btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Post"}</button>
             {addView ? addFields : <div></div>}
 
             {posts.length > 0 ? 
-            <ul>
+            <ul className="list-group">
                 {posts.map(data => (
-                    <li key={data.id}><Post deletePost={() => deletePost(data.id)} 
+                    <li className="list-group-item m-2" key={data.id}><Post deletePost={() => deletePost(data.id)} 
                                             title={data.title} 
                                             body={data.body} 
                                             postId={data.id} 

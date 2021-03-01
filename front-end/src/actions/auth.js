@@ -5,7 +5,8 @@ import axios from "axios";
 
 import { 
 REGISTER_USER,
-GET_TOKEN
+GET_TOKEN,
+LOG_OUT
 
 } from "./types" 
 
@@ -49,6 +50,12 @@ function registerUser(data) {
     return { 
         type: REGISTER_USER,
         data
+    }
+}
+
+export function logout() {
+    return {
+        type: LOG_OUT
     }
 }
 

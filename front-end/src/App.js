@@ -3,6 +3,7 @@ import './App.css';
 import Routes from "./Routes"
 import Navbar from "./components/Navbar"
 import useLocalStorage from './hooks/useLocalStorage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 

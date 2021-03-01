@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTokenFromApi, registerUserWithApi } from "../actions/auth";
 import { useHistory } from "react-router-dom";
 import { decode } from "jsonwebtoken";
+import "./Login.css"
 
 function Login() {
     const [loginView, setLoginView] = useState(true);
@@ -28,6 +29,7 @@ function Login() {
 
     useEffect(function() {
         if (token && auth) {
+            localStorage.setItem("token", token)
             const { username } = decode(token)
             history.push(`users/${username}`)
         } else {
@@ -39,13 +41,13 @@ function Login() {
     
     const loginFields = (<>
         <LoginForm login={loginApi}/> 
-        <aside>New User? <button onClick={toggleLogin}>Click Here</button>to register</aside>
+        <aside>New User? <button className="btn btn-primary" onClick={toggleLogin}>Click Here</button>to register</aside>
         </>)
 
 
     const registerFields = (<>
         <RegisterForm register={registerApi}/>
-        <aside>Already Registered? <button onClick={toggleLogin}>Click Here</button>to sign in</aside>
+        <aside>Already Registered? <button className="btn btn-primary" onClick={toggleLogin}>Click Here</button>to sign in</aside>
         </>)
 
     return (

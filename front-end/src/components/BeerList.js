@@ -16,14 +16,13 @@ function BeerList() {
     }
     
 
-
     return (
         <div>
             <Search searchFor={search} view={"beers"}/>
             {beers ? 
-            <ul>
+            <ul className="list-group">
                 {beers.map(data => (
-                    <li key={data.id}><Beer data={data}/></li>
+                    <li className="list-group-item" key={data.id}><Beer data={data}/></li>
                 ))}
             </ul> : <h2>Search Beers</h2>}
         </div>

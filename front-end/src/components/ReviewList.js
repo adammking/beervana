@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserReviewsFromApi, addReviewWithApi, deleteReviewsFromApi } from '../actions/reviews';
 import { decode } from "jsonwebtoken"
 import NewPostRevForm from "./NewPostRevForm"
+import './ReviewList.css'
+
 
 function ReviewList() {
 
@@ -40,13 +42,13 @@ function ReviewList() {
     return (
         <div>
             <h3>Reviews:</h3>
-            <button onClick={toggleForm}>{addView ? "Cancel" : "Add Review"}</button>
+            <button className="btn btn-primary btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Review"}</button>
             {addView ? addFields : <div></div>}
 
             {reviews.length > 0 ? 
-            <ul>
+            <ul className="list-group">
                 {reviews.map(data => (
-                    <li key={data.id}><Review deleteReview={() => deleteReview(data.id)} title={data.title} body={data.body}/></li>
+                    <li className="list-group-item m-2" key={data.id}><Review deleteReview={() => deleteReview(data.id)} title={data.title} body={data.body}/></li>
                 ))}
             </ul>
             : <h5>No Reviews</h5>}

@@ -24,10 +24,10 @@ function FollowingList() {
         <div>
             <h3>Following:</h3>
             {following.length > 0 ? 
-            <ul>
+            <ul className="list-group">
                 {following.map(data => (
-                    <li key={data.users_being_followed_id}>{data.username}
-                    <button onClick={() => unFollow(data.users_being_followed_id)}>Unfollow</button>
+                    <li className="list-group-item" key={data.users_being_followed_id}>{data.username}
+                    <button className="btn btn-primary btn-sm m-2" onClick={() => unFollow(data.users_being_followed_id)}>Unfollow</button>
                     </li>
                 ))}
             </ul>

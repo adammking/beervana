@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 
 function LoginForm({login}) {
@@ -24,30 +24,44 @@ function LoginForm({login}) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        // <form onSubmit={handleSubmit}>
 
-            <div className="form-group">
-                <label htmlFor="loginform-username">Username: </label>
-                <input onChange={handleChange}
-                        id="loginform-username"
-                        name="username"
-                        className="form-control"
-                        value={loginData.username}/>            
+        //     <div classNameName="form-group">
+        //         <label htmlFor="loginform-username">Username: </label>
+        //         <input onChange={handleChange}
+        //                 id="loginform-username"
+        //                 name="username"
+        //                 classNameName="form-control"
+        //                 value={loginData.username}/>            
             
-            </div>
+        //     </div>
 
-            <div className="form-group">
-                <label htmlFor="loginform-password">Password: </label>
-                <input onChange={handleChange}
-                        id="loginform-password"
-                        name="password"
-                        className="form-control"
-                        value={loginData.password}/>
-            </div>
+        //     <div classNameName="form-group">
+        //         <label htmlFor="loginform-password">Password: </label>
+        //         <input onChange={handleChange}
+        //                 id="loginform-password"
+        //                 name="password"
+        //                 classNameName="form-control"
+        //                 value={loginData.password}/>
+        //     </div>
 
-            <button type="submit">Login</button>
+        //     <button type="submit">Login</button>
 
-        </form>
+        // </form>
+
+        
+<form onSubmit={handleSubmit}> 
+  <div className="mb-3">
+    <label htmlFor="loginform-username" className="form-label">Username</label>
+    <input id="loginform-username" onChange={handleChange} aria-describedby="usernames" name="username" className="form-control" value={loginData.username}/>
+  </div>
+  <div className="mb-3">
+    <label htmlFor="loginform-password" className="form-label">Password</label>
+    <input type="password" className="form-control" onChange={handleChange} id="loginform-password" name="password" value={loginData.password}/>
+  </div>
+  <button type="submit" className="btn btn-primary">Submit</button>
+</form>
+
     )
     
 }
