@@ -10,10 +10,10 @@ DELETE_POST,
 } from "./types";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/users"
-const token = localStorage.getItem("token")
 
 export function getUserPostsFromApi(username){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts`, 
                                       headers: {
@@ -33,6 +33,7 @@ function getAllPosts(data){
 
 export function getSinglePostFromApi(username, postId){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${postId}`, 
                                       headers: {
@@ -51,6 +52,7 @@ function getPost(data){
 
 export function addPostWithApi(username, data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/posts`, 
                                       data: data,
@@ -70,6 +72,7 @@ function addPost(data){
 
 export function deletePostsFromApi(username, postId){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/posts/${postId}`, 
                                       data: {id: postId},

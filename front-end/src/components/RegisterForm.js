@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./RegisterForm.css"
 
 function RegisterForm({register}) {
 
@@ -31,26 +32,22 @@ function RegisterForm({register}) {
  <form onSubmit={handleSubmit}> 
 
   <div className="mb-3">
-    <label htmlFor="newuserform-username" className="form-label">Username</label>
-    <input id="loginform-username" onChange={handleChange} aria-describedby="usernames" name="username" className="form-control" value={userData.username}/>
+    <input id="loginform-username" onChange={handleChange} aria-describedby="usernames" name="username" className="form-control" value={userData.username} placeholder="Username"/>
   </div>
 
   <div className="mb-3">
-    <label htmlFor="newuserform-password" className="form-label">Password</label>
-    <input type="password" className="form-control" onChange={handleChange} id="newuserform-password" name="password" value={userData.password}/>
+    <input type="password" className="form-control" onChange={handleChange} id="newuserform-password" name="password" placeholder="Password" value={userData.password}/>
   </div>
 
     <div className="mb-3">
-     <label htmlFor="newuserform-first" className="form-label">First Name:</label>
-     <input className="form-control" onChange={handleChange} id="newuserform-first" name="firstName" value={userData.firstName}/>
+     <input className="form-control" onChange={handleChange} id="newuserform-first" name="firstName" placeholder="First Name" value={userData.firstName}/>
    </div>
 
 <div className="mb-3">
-    <label htmlFor="newuserform-last" className="form-label">Last Name:</label>
-    <input className="form-control" onChange={handleChange} id="newuserform-last" name="lastName" value={userData.lastName}/>
+    <input className="form-control" onChange={handleChange} id="newuserform-last" name="lastName" placeholder="Last Name" value={userData.lastName}/>
   </div>
 
-  <button type="submit" className="btn btn-primary">Register</button>
+  <button type="submit" className="btn btn-warning btn-sm">Register</button>
 </form>
     )
     

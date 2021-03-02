@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Search.css"
 
 function Search({ searchFor, view }) {
   const [search, setSearch] = useState({
@@ -36,7 +37,7 @@ function Search({ searchFor, view }) {
   }
 
   const beerSearchFields = (
-  <div className="container">
+  <div id="beer-search" className="container m-4">
   <form onSubmit={handleSubmit}> 
 
   <div className="mb-3">
@@ -48,7 +49,7 @@ function Search({ searchFor, view }) {
            value={search.name} 
            placeholder="Beer name"/>
   </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-warning">
           Search
         </button>
       </form>
@@ -56,37 +57,8 @@ function Search({ searchFor, view }) {
   )
 
   const brewerySearchFields = (
-    // <div className="Search mb-4">
-    //   <form className="form-inline" onSubmit={handleSubmit}>
-    //     <input
-    //       className="form-control form-control-lg flex-grow-1"
-    //       name="name"
-    //       placeholder="Brewery name"
-    //       value={search.name}
-    //       onChange={handleChange}
-    //     />
-
-    //     <input
-    //       className="form-control form-control-lg flex-grow-1"
-    //       name="state"
-    //       placeholder="State"
-    //       value={search.state}
-    //       onChange={handleChange}
-    //     />
-
-    //     <input
-    //       className="form-control form-control-lg flex-grow-1"
-    //       name="country"
-    //       placeholder="Country"
-    //       value={search.country}
-    //       onChange={handleChange}
-    //     />
-    //     <button type="submit" className="btn btn-lg btn-primary">
-    //       Submit
-    //     </button>
-    //   </form>
-    // </div>
-<div className="container">
+    
+<div  id="brewery-search"className="container m-4">
   <form onSubmit={handleSubmit}> 
 
   <div className="mb-3">
@@ -119,7 +91,7 @@ function Search({ searchFor, view }) {
            placeholder="Country"/>
   </div>
   
-  <button type="submit" className="btn btn-primary">Search</button>
+  <button type="submit" className="btn btn-warning">Search</button>
 </form>
 </div>
   )

@@ -14,16 +14,17 @@ function Brewery({data}) {
 
 
     return (
-        <div id={id}>
-            <h1>{name}</h1>
-            <h4>{address1}</h4>
-            <h4>{city}</h4>
-            <h4>{state}</h4>
-            <h4>{country}</h4>
-            <h4>{phone}</h4>
-            <h4>{website}</h4>
-            <p>{description}</p>
-        </div>
+
+
+<div id={id} className="card">
+  <div className="card-body">
+    <h5 className="card-title">{name}</h5>
+    <p className="card-text">{description}</p>
+    <p className="card-text">{address1}, {city}, {state}, {country}</p>
+    <p className="card-text">{phone}</p>
+    <p className="card-text">{website}</p>
+  </div>
+</div>
     )
 }
 

@@ -5,7 +5,7 @@ import ReviewList from './ReviewList';
 import PostList from './PostList';
 import FollowerList from './FollowerList';
 import FollowingList from './FollowingList';
-import { logout } from '../actions/auth'
+import { logoutAll } from '../actions/logout'
 import './UserHome.css'
 
 
@@ -16,12 +16,13 @@ function UserHome() {
     const { username } = useParams();
    
 function userLogOut() {
-    dispatch(logout())
-    localStorage.setItem("token", null)
+    dispatch(logoutAll())
     history.push("/login")
+    console.log("Local storage is cleared")
+    localStorage.clear()
 }
 
-    return(
+return(
         
 
 <div className="container">
@@ -29,18 +30,18 @@ function userLogOut() {
     <aside><button onClick={userLogOut} className="btn btn-danger">Logout</button></aside>
     <div className="row">
     <div className="col-sm">
-      <FollowerList/>
+      <FollowerList username={username}/>
     </div>
     <div className="col-sm">
-      <FollowingList/>
+      <FollowingList username={username}/>
     </div>
   </div>
   <div className="row">
     <div className="col-sm">
-      <ReviewList/>
+      <ReviewList username={username}/>
     </div>
     <div className="col-sm">
-      <PostList/>
+      <PostList username={username}/>
     </div>
   </div>
   

@@ -4,6 +4,7 @@ GET_USER_POSTS,
 GET_POST,
 ADD_POST,
 DELETE_POST,
+LOG_OUT
 
 
 
@@ -31,6 +32,9 @@ switch (action.type) {
             const posts = {...state.posts}
             delete posts[action.data.id]
             return { ...state, posts}
+
+        case LOG_OUT: 
+            return INITIAL_STATE
 
         
 

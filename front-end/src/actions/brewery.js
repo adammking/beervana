@@ -11,11 +11,11 @@ UPDATE_BEER_IN_BREWERY
 } from "./types" 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/breweries"
-const token = localStorage.getItem("token")
 
 
 export function getBreweryFromApi(id){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${id}`, 
                                       headers: {
@@ -35,6 +35,7 @@ function getBrewery(data) {
 
 export function searchBreweriesFromApi(data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/`, 
                                       params: data,
@@ -56,6 +57,7 @@ function searchBreweries(data) {
 
 export function updateBreweryFromApi(id, data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "PATCH",
                                       url: `${API_URL}/${id}`, 
                                       data: data,
@@ -75,6 +77,7 @@ function updateBrewery(data) {
 
 export function addBreweryFromApi(data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "POST",
                                       url: `${API_URL}`, 
                                       data: data,
@@ -94,6 +97,7 @@ function addBrewery(data) {
 
 export function addBeerToBreweryWithApi(id, data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${id}/beers`, 
                                       data: data,
@@ -113,6 +117,7 @@ function addBeerToBrewery(data) {
 
 export function updateBeerInBreweryFromApi(id, name, data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "PATCH",
                                       url: `${API_URL}/${id}beers/${name}`, 
                                       data: data,

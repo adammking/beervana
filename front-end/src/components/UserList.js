@@ -39,7 +39,7 @@ function UserList() {
             <ul className="list-group">
                 {users.map(data => (
                     <li className="list-group-item m-2"key={data.id}><h3>{data.username}</h3>
-                    {followingIds.has(data.id) ? <button className="btn btn-primary btn-sm m-2" onClick={() => unFollow(data.id)}>Unfollow</button> : <button className="btn btn-primary btn-sm" onClick={() => addFollow(data.id)}>Follow</button>}
+                    {followingIds.has(data.id) ? <button className="btn btn-warning btn-sm m-2" onClick={() => unFollow(data.id)}>Unfollow</button> : <button className="btn btn-warning btn-sm" onClick={() => addFollow(data.id)}>Follow</button>}
                     </li>
                 ))}
             </ul>

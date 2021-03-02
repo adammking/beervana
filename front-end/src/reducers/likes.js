@@ -3,6 +3,7 @@ import {
 ADD_LIKE,
 GET_LIKES, 
 REMOVE_LIKE, 
+LOG_OUT
 
 
 } from "../actions/types" 
@@ -22,6 +23,9 @@ export default function rootReducer(state = INITIAL_STATE, action) {
 
         case REMOVE_LIKE:
             return {...state, likes: state.likes.filter(data => data.id !== action.data.likes.id)}
+
+        case LOG_OUT: 
+            return INITIAL_STATE
 
         default:
             return state;

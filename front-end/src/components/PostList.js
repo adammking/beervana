@@ -8,17 +8,17 @@ import { decode } from "jsonwebtoken"
 import NewPostRevForm from "./NewPostRevForm"
 import './PostList.css'
 
-function PostList() {
+function PostList({username}) {
 
     const [addView, setAddView] = useState(false);
 
     
     const dispatch = useDispatch();
-    const { username, id } = decode(localStorage.getItem("token"))
+    const { id } = decode(localStorage.getItem("token"))
     const posts = useSelector(st => st.posts.posts);
     const likes = useSelector(st => st.likes.likes)
     const likeSet = new Set()
-    
+
     const addFields = (<>
         <NewPostRevForm add={addPost}/> 
         </>)
@@ -73,7 +73,7 @@ function PostList() {
     return (
         <div>
             <h3>Posts:</h3>
-            <button className="btn btn-primary btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Post"}</button>
+            <button className="btn btn-warning btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Post"}</button>
             {addView ? addFields : <div></div>}
 
             {posts.length > 0 ? 

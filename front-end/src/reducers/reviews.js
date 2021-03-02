@@ -3,7 +3,8 @@ import {
 GET_USER_REVIEWS,
 GET_REVIEW,
 ADD_REVIEW,
-DELETE_REVIEW
+DELETE_REVIEW,
+LOG_OUT
 
 } from "../actions/types" 
 
@@ -29,6 +30,10 @@ switch (action.type) {
             const reviews = {...state.reviews}
             delete reviews[action.data.id]
             return { ...state, reviews}
+
+        case LOG_OUT: 
+            return INITIAL_STATE
+
         default:
             return state;
     }

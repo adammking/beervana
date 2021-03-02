@@ -9,11 +9,11 @@ GET_BEER
 } from "./types" 
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/beers"
-const token = localStorage.getItem("token")
 
 
 export function getBeerFromApi(id){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${id}`, 
                                       headers: {
@@ -33,6 +33,7 @@ function getBeer(data) {
 
 export function searchBeersFromApi(data){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/`, 
                                       params: data,

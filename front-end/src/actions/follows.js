@@ -13,8 +13,10 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001/users"
 const token = localStorage.getItem("token")
 
 
+
 export function getFollowersFromApi(username){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/followers`, 
                                       headers: {
@@ -33,6 +35,7 @@ function getFollowers(data) {
 
 export function getFollowingFromApi(username){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/following`, 
                                       headers: {
@@ -51,6 +54,7 @@ function getFollowing(data) {
 
 export function addFollowWithApi(username, id){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/follow`, 
                                       data: {id: id},
@@ -70,12 +74,14 @@ function addFollow(data) {
 
 export function deleteFollowFromApi(username, id){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/follow`, 
                                       data: {id: id},
                                       headers: {
                                         Authorization: `Bearer ${token}` 
                                       }})
+        console.log(response.data)
         return dispatch(removeFollow(response.data))
     }
 }

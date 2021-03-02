@@ -8,13 +8,12 @@ import NewPostRevForm from "./NewPostRevForm"
 import './ReviewList.css'
 
 
-function ReviewList() {
+function ReviewList({username}) {
 
     const [addView, setAddView] = useState(false);
 
     
     const dispatch = useDispatch();
-    const { username } = decode(localStorage.getItem("token"))
     const reviews = useSelector(st => st.reviews.reviews);
 
     const addFields = (<>
@@ -42,7 +41,7 @@ function ReviewList() {
     return (
         <div>
             <h3>Reviews:</h3>
-            <button className="btn btn-primary btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Review"}</button>
+            <button className="btn btn-warning btn-sm" onClick={toggleForm}>{addView ? "Cancel" : "Add Review"}</button>
             {addView ? addFields : <div></div>}
 
             {reviews.length > 0 ? 

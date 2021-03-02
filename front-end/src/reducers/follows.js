@@ -4,6 +4,7 @@ ADD_FOLLOW,
 REMOVE_FOLLOW,
 GET_FOLLOWERS,
 GET_FOLLOWING,
+LOG_OUT
 
 
 } from "../actions/types" 
@@ -30,6 +31,9 @@ export default function rootReducer(state = INITIAL_STATE, action) {
 
         case GET_FOLLOWING:
             return {...state, following: action.data.following};
+
+        case LOG_OUT: 
+            return INITIAL_STATE
 
         default:
             return state;

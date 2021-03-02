@@ -7,11 +7,14 @@ function Review( {id, title, body, deleteReview}) {
     }
 
     return (
-        <div>
-            <h3>{title}</h3>
-            <p>{body}</p>
-            <button className="btn btn-primary btn-sm m-2" onClick={handleDelete}>Remove Review</button>
-        </div>
+
+<div className="card border border-3">
+  <div className="card-body">
+    <h5 className="card-title">{title}</h5>
+    <p className="card-text">{body}</p>
+    <button className="btn btn-warning btn-sm m-2" onClick={handleDelete}>Remove Review</button>
+  </div>
+</div>
     )
 }
 

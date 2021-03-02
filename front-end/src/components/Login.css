@@ -1,0 +1,8 @@
+#landing-page {
+    background: url("../images/kyle-wagner-beer-closet.jpg") no-repeat center;
+  background-size: cover;
+  height: 500px;
+  position: relative;
+  color: #dba622;
+
+}

@@ -4,7 +4,8 @@ GET_BREWERY,
 ADD_BREWERY,
 UPDATE_BREWERY,
 ADD_BEER_TO_BREWERY,
-UPDATE_BEER_IN_BREWERY
+UPDATE_BEER_IN_BREWERY,
+LOG_OUT
 
 } from "../actions/types" 
 
@@ -53,6 +54,9 @@ export default function rootReducer(state= INITIAL_STATE, action) {
             return {...state, 
                     currentBrewery: {...state.currentBrewery, 
                         beers: [...state.currentBrewery.beers, {...action.data.beer}]}}
+
+        case LOG_OUT: 
+            return INITIAL_STATE
         
         default:
             return state;

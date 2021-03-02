@@ -13,6 +13,7 @@ const token = localStorage.getItem("token")
 
 export function getLikesFromApi(username, postId){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "GET",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       headers: {
@@ -31,6 +32,7 @@ function getLikes(data) {
 
 export function addLikesWithApi(username, postId){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "POST",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       data: {},
@@ -51,6 +53,7 @@ function addLike(data) {
 
 export function deleteLikesFromApi(username, postId){
     return async function(dispatch) {
+        const token = localStorage.getItem("token")
         const response = await axios({method: "DELETE",
                                       url: `${API_URL}/${username}/posts/${postId}/likes`, 
                                       data: {},

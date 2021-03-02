@@ -27,31 +27,32 @@ function Login() {
         dispatch(registerUserWithApi(loginData))
     }
 
+
+
     useEffect(function() {
         if (token && auth) {
-            localStorage.setItem("token", token)
             const { username } = decode(token)
             history.push(`users/${username}`)
         } else {
             history.push("/login")
         }
-    }, [token, auth])
+    }, [auth])
     
     
     
     const loginFields = (<>
         <LoginForm login={loginApi}/> 
-        <aside>New User? <button className="btn btn-primary" onClick={toggleLogin}>Click Here</button>to register</aside>
+        <aside>New User? <button className="btn btn-warning btn-sm m-2" onClick={toggleLogin}>Click Here</button>to register</aside>
         </>)
 
 
     const registerFields = (<>
         <RegisterForm register={registerApi}/>
-        <aside>Already Registered? <button className="btn btn-primary" onClick={toggleLogin}>Click Here</button>to sign in</aside>
+        <aside>Already Registered? <button className="btn btn-warning btn-sm m-2" onClick={toggleLogin}>Click Here</button>to sign in</aside>
         </>)
 
     return (
-        <div>
+        <div id="landing-page">
             <h1>Welcome to Beervana!</h1>
             {loginView ? loginFields : registerFields}
         </div>

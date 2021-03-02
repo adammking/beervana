@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getFollowingFromApi, deleteFollowFromApi } from '../actions/follows';
 import { decode } from "jsonwebtoken"
 
-function FollowingList() {
+function FollowingList({username}) {
     
     const dispatch = useDispatch();
-    const { username } = decode(localStorage.getItem("token"))
     const following = useSelector(st => st.follows.following) ;
 
     useEffect(function() {
@@ -27,7 +26,7 @@ function FollowingList() {
             <ul className="list-group">
                 {following.map(data => (
                     <li className="list-group-item" key={data.users_being_followed_id}>{data.username}
-                    <button className="btn btn-primary btn-sm m-2" onClick={() => unFollow(data.users_being_followed_id)}>Unfollow</button>
+                    <button className="btn btn-warning btn-sm m-2" onClick={() => unFollow(data.users_being_followed_id)}>Unfollow</button>
                     </li>
                 ))}
             </ul>
