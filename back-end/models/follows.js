@@ -39,8 +39,10 @@ const { BadRequestError } = require("../expressError");
         static async getFollowing(userId) {
 
             let followingRes = await db.query(
-                `SELECT users_being_followed_id
+                `SELECT users_being_followed_id, username
                  FROM follows
+                 JOIN users
+                 ON follows.users_being_followed_id = users.id
                  WHERE users_following_id = $1`,
                  [userId]
             )
@@ -101,7 +103,7 @@ const { BadRequestError } = require("../expressError");
                  WHERE users_being_followed_id = $1
                  AND users_following_id = $2
                  RETURNING users_being_followed_id`,
-                  [userId, followingId]
+                  [followingId, userId]
             );
 
             let unfollow = unfollowRes.rows[0]

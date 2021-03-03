@@ -5,19 +5,19 @@ const { NotFoundError, BadRequestError } = require("../expressError")
 
 class Likes {
 
-    static async getLikes(post_id) {
+    static async getLikes(user_id) {
         let likeRes = await db.query(
-            `SELECT COUNT(*)
+            `SELECT posts_id 
              FROM likes
-             WHERE posts_id = $1`,
-             [post_id]
+             WHERE users_id = $1`,
+             [user_id]
         )
 
-        let likeCount = likeRes.rows[0]
-        return likeCount
+        let likes = likeRes.rows ? likeRes.rows : [];
+        return likes
     }
 
-    static async addLike({ post_id, user_id }) {
+    static async addLike(post_id, user_id) {
         let preCheck = await db.query(
             `SELECT id
              FROM likes
@@ -42,13 +42,14 @@ class Likes {
 
     }
 
-    static async deleteLike({ post_id, user_id }) {
+    static async deleteLike(post_id, user_id) {
+        
         let likeRes = await db.query(
             `DELETE 
              FROM likes
              WHERE posts_id = $1 
              AND users_id = $2
-             RETURNING likes.id`,
+             RETURNING id`,
              [post_id, user_id]
         );
 

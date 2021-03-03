@@ -10,7 +10,7 @@ class Tags {
             `INSERT INTO Tags
                 (type, users_id)
              VALUES ($1, $2) 
-             RETURNING posts_id`, 
+             RETURNING type`, 
              [type, user_id]
         );
 

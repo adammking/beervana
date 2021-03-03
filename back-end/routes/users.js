@@ -34,7 +34,7 @@ router.get("/", ensureLoggedIn, async function(req, res, next) {
  * Authorization required: same user-as-:username
  **/
 
-router.get("/:username", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username", ensureLoggedIn, async function(req, res, next) {
     try {
         const user = await Users.get(req.params.username);
         return res.json({ user });
@@ -88,7 +88,7 @@ router.delete("/:username", ensureCorrectUser, async function (req, res, next) {
 
 /**User Routes for followers */
 
-router.get("/:username/followers", ensureCorrectUser, async function(req, res, next){
+router.get("/:username/followers", ensureLoggedIn, async function(req, res, next){
     try {
         const followers = await Follows.getFollowers(res.locals.user.id)
         return res.json({ followers })
@@ -97,7 +97,7 @@ router.get("/:username/followers", ensureCorrectUser, async function(req, res, n
     }
 })
 
-router.get("/:username/following", ensureCorrectUser, async function(req, res, next){
+router.get("/:username/following", ensureLoggedIn, async function(req, res, next){
     try {
         const following = await Follows.getFollowing(res.locals.user.id)
         return res.json({ following })
@@ -120,6 +120,7 @@ router.delete("/:username/follow", ensureCorrectUser, async function(req, res, n
     try {
         const { id } = req.body;
         const delFollow = await Follows.stopFollowing(res.locals.user.id, id)
+    
         return res.json({ delFollow })
     } catch (err) {
         return next(err)
@@ -136,7 +137,7 @@ router.delete("/:username/follow", ensureCorrectUser, async function(req, res, n
  * Authorization required: same user-as-:username
  **/
 
-router.get("/:username/posts", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username/posts", ensureLoggedIn, async function(req, res, next) {
     try {
         const posts = await Posts.getUserPosts(res.locals.user.id)
         return res.json({ posts })
@@ -166,7 +167,7 @@ router.post("/:username/posts", ensureCorrectUser, async function(req, res, next
  * Authorization required: same user-as-:username
  **/
 
-router.get("/:username/posts/:id", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username/posts/:id", ensureLoggedIn, async function(req, res, next) {
     try {
         const post = await Posts.getSinglePost(req.params.id)
         
@@ -192,10 +193,10 @@ router.delete("/:username/posts/:id", ensureCorrectUser, async function(req, res
 
 /** User Routes for Post likes */
 
-router.get("/:username/posts/:id/likes", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username/posts/:id/likes", ensureLoggedIn, async function(req, res, next) {
     try {
-        const likes = await Likes.getLikes(req.params.id)
-        
+        let userId = res.locals.user.id
+        const likes = await Likes.getLikes(userId)
         return res.json({ likes })
     } catch (err) {
         return next(err);
@@ -204,9 +205,10 @@ router.get("/:username/posts/:id/likes", ensureCorrectUser, async function(req, 
 
 router.post("/:username/posts/:id/likes", ensureCorrectUser, async function(req, res, next) {
     try {
+
         let postId = req.params.id
         let userId = res.locals.user.id
-        const likes = await Likes.addLike({postId, userId})
+        const likes = await Likes.addLike(postId, userId)
         return res.json({ likes })
     } catch (err) {
         return next(err);
@@ -217,7 +219,8 @@ router.delete("/:username/posts/:id/likes", ensureCorrectUser, async function(re
     try {
         let postId = req.params.id
         let userId = res.locals.user.id
-        const likes = await Likes.deleteLike({postId, userId})
+        
+        const likes = await Likes.deleteLike(postId, userId)
         return res.json({ likes })
     } catch (err) {
         return next(err);
@@ -237,7 +240,7 @@ router.delete("/:username/posts/:id/likes", ensureCorrectUser, async function(re
  * Authorization required: same user-as-:username
  **/
 
-router.get("/:username/reviews", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username/reviews", ensureLoggedIn, async function(req, res, next) {
     try {
         const reviews = await Reviews.getUserReviews(res.locals.user.id)
         return res.json({ reviews })
@@ -268,7 +271,7 @@ router.post("/:username/reviews", ensureCorrectUser, async function(req, res, ne
  * Authorization required: same user-as-:username
  **/
 
-router.get("/:username/reviews/:id", ensureCorrectUser, async function(req, res, next) {
+router.get("/:username/reviews/:id", ensureLoggedIn, async function(req, res, next) {
     try {
         const review = await Reviews.getSingleReview(req.params.id)
         return res.json({ review })
