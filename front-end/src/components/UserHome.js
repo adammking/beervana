@@ -29,19 +29,20 @@ return(
     <h1>{username}</h1>
     <aside><button onClick={userLogOut} className="btn btn-danger">Logout</button></aside>
     <div className="row">
-    <div className="col-sm">
-      <FollowerList username={username}/>
+    <div className="col-8">
+      <PostList username={username}/>
+      
     </div>
     <div className="col-sm">
       <FollowingList username={username}/>
     </div>
   </div>
   <div className="row">
-    <div className="col-sm">
+    <div className="col-8">
       <ReviewList username={username}/>
     </div>
     <div className="col-sm">
-      <PostList username={username}/>
+      <FollowerList username={username}/>
     </div>
   </div>
   

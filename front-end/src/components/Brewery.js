@@ -20,7 +20,10 @@ function Brewery({data}) {
   <div className="card-body">
     <h5 className="card-title">{name}</h5>
     <p className="card-text">{description}</p>
-    <p className="card-text">{address1}, {city}, {state}, {country}</p>
+    <p className="card-text">{address1}</p>
+    <p className="card-text">{city}</p>
+    <p className="card-text">{state}</p>
+    <p className="card-text">{country}</p>
     <p className="card-text">{phone}</p>
     <p className="card-text">{website}</p>
   </div>

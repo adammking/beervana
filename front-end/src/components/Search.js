@@ -37,7 +37,7 @@ function Search({ searchFor, view }) {
   }
 
   const beerSearchFields = (
-  <div id="beer-search" className="container m-4">
+  <div id="beer-search" className="container mt-2">
   <form onSubmit={handleSubmit}> 
 
   <div className="mb-3">
@@ -58,7 +58,7 @@ function Search({ searchFor, view }) {
 
   const brewerySearchFields = (
     
-<div  id="brewery-search"className="container m-4">
+<div  id="brewery-search"className="container mt-2">
   <form onSubmit={handleSubmit}> 
 
   <div className="mb-3">

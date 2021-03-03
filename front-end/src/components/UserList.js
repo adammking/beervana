@@ -1,8 +1,10 @@
 import { getAllUsersFromApi } from "../actions/user"
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import React, { useEffect }from "react";
 import { addFollowWithApi, deleteFollowFromApi, getFollowingFromApi } from '../actions/follows';
 import {decode}  from "jsonwebtoken"
+import "./UserList.css"
 
 function UserList() {
 
@@ -36,9 +38,9 @@ function UserList() {
         <div>
             <h3>Users:</h3>
             {users.length > 0 ? 
-            <ul className="list-group">
+            <ul id="user-list" className="list-group">
                 {users.map(data => (
-                    <li className="list-group-item m-2"key={data.id}><h3>{data.username}</h3>
+                    <li id="users" className="list-group-item"key={data.id}><Link to={`users/${data.username}`}>{data.username}</Link>
                     {followingIds.has(data.id) ? <button className="btn btn-warning btn-sm m-2" onClick={() => unFollow(data.id)}>Unfollow</button> : <button className="btn btn-warning btn-sm" onClick={() => addFollow(data.id)}>Follow</button>}
                     </li>
                 ))}
